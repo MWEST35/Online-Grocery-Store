@@ -1,0 +1,58 @@
+.Container {
+    background-color: #a0b790;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: grid;
+}
+
+.logo {
+    position: absolute;
+    justify-self: left;
+    height: 120px;
+    top: -25px;
+    left: -70px;
+}
+
+.Login {
+    font-family: Calibri;
+    font-size: 30px;
+    text-align: center;
+    grid-row: 2 / 3;
+    grid-column: 2 / 3;
+}
+
+.text-box {
+    font-size: 30px;
+    background-color: #f4d4b9;
+    border-color: #8a725a;
+    border-width: 5px;
+    border-radius: 5px;
+}
+
+.login-button {
+    font-size: 30px;
+    background-color: #f4d4b9;
+    border-color: #8a725a;
+    border-style: outset;
+    border-width: 5px;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.register-button {
+    font-size: 30px;
+    background-color: #f4d4b9;
+    border-color: #8a725a;
+    border-style: outset;
+    border-width: 5px;
+    border-radius: 5px;
+    margin-right: 10px;
+    margin-left: 10px;
+}

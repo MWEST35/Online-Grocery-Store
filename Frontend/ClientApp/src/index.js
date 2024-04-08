@@ -12,7 +12,7 @@ const root = createRoot(rootElement);
 
 root.render(
   <BrowserRouter basename={baseUrl}>
-    <App />
+        <App />
   </BrowserRouter>);
 
 // If you want your app to work offline and load faster, you can change
