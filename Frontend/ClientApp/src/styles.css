@@ -56,3 +56,23 @@
     margin-right: 10px;
     margin-left: 10px;
 }
+
+.Register {
+    font-family: Calibri;
+    font-size: 30px;
+    text-align: center;
+    grid-row: 2 / 3;
+    grid-column: 2 / 3;
+}
+
+.submit-button {
+    font-size: 30px;
+    background-color: #f4d4b9;
+    border-color: #8a725a;
+    border-style: outset;
+    border-width: 5px;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-left: 10px;
+}

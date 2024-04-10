@@ -1,4 +1,5 @@
 import { Login } from "./components/Login";
+import { Products } from "./components/Products";
 import { Register } from "./components/Register";
 
 const AppRoutes = [
@@ -9,6 +10,10 @@ const AppRoutes = [
   {
     path: "/register",
     element: <Register />
+  },
+  {
+      path: "/products",
+      element: <Products />
   }
 ];
 
