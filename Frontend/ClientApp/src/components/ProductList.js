@@ -1,3 +1,6 @@
+import ProductCard from "./ProductCard";
+
+
 /* Displays a array list of product */
 const ProductList = ({ products }) => {
     return (
@@ -8,3 +11,5 @@ const ProductList = ({ products }) => {
         </div>
     );
 };
+
+export default ProductList;

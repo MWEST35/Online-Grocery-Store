@@ -1,3 +1,5 @@
+import CartItem from "./CartItem";
+
 /* Allows users to add items to their shopping cart */
 const ShoppingCart = ({ cartItems, handleCheckout }) => {
     return (
@@ -10,3 +12,5 @@ const ShoppingCart = ({ cartItems, handleCheckout }) => {
         </div>
     );
 };
+
+export default ShoppingCart;

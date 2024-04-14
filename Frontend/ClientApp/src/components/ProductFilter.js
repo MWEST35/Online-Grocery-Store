@@ -14,3 +14,5 @@ const ProductFilter = ({ categories, handleFilterChange }) => {
         </div>
     );
 };
+
+export default ProductFilter;

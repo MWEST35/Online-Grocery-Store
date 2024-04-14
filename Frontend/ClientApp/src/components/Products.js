@@ -10,21 +10,21 @@ export class Products extends Component {
         super(props);
         this.state = {
             products: [ /* array of products goes here */],
-            productFilters: [/* array of product filters goes here */],
-            cartItems: [/* array of cart items goes here */]
+            categories: [/* array of product filters goes here */],
+            cartItems: [/* array of cart items goes here */],
         };
     }
 
     render() {
         const { products } = this.state;
-        const { productFilters } = this.state;
+        const { categories } = this.state;
         const { cartItems } = this.state;
 
         return (
             <div className="Container">
             <p> Products Page :) </p>
                 <ProductList products={products} /> {/* Pass the products array to the ProductList component */}
-                <ProductFilter productFilters={productFilters} /> {/* Pass the productsFilters array to the ProductFilter component */}
+                <ProductFilter productFilters={categories} /> {/* Pass the productsFilters array to the ProductFilter component */}
                 <ShoppingCart cartItems={cartItems} /> {/* Pass the cartItems array to the ShoppingCart component */}
             </div>
         );

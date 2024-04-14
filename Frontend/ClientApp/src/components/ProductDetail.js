@@ -8,3 +8,5 @@ const ProductDetail = ({ product }) => {
         </div>
     );
 };
+
+export default ProductDetail;
