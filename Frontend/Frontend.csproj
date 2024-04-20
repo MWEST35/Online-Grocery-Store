@@ -29,6 +29,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\components\api-authorization\ProductCard.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Engines\Engines.csproj" />
   </ItemGroup>
 
