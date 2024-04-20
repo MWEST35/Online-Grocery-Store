@@ -9,7 +9,7 @@ export class Login extends Component {
     return (
       <div className="Container">
             <img
-          src="grocery-logo.png"
+                src="https://i.imgur.com/1dK701w.png"
           alt="logo"
           className="logo"
           draggable="false"

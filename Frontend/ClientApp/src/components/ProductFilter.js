@@ -4,7 +4,6 @@ const ProductFilter = ({ categories, handleFilterChange }) => {
         <div className="product-filter">
             <label>Filter by Category:</label>
             <select onChange={handleFilterChange}>
-                <option value="all">All</option>
                 {categories.map(category => (
                     <option key={category} value={category}>
                         {category}

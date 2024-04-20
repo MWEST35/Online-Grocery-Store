@@ -1,11 +1,12 @@
 /* cards are encapsulated in a product card component */
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, handleAddToCart }) => {
     return (
         <div className="product-card">
-            <img src={product.image} alt={product.title} />
-            <h3>{product.title}</h3>
-            <p>{product.price}</p>
+            <img src={product.image} alt={product.name} />
+            <h3>{product.name}</h3>
+            <p>Price: ${product.price}</p>
             {/* Additional UI elements and interactions */}
+            <button onClick={() => handleAddToCart(product)}>Add to Cart</button>
         </div>
     );
 };
