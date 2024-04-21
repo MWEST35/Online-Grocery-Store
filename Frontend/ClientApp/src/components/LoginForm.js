@@ -22,7 +22,7 @@ export default function LoginForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch(`http://localhost:44478/user/${username_email}/${password}`, {
+    fetch(`http://localhost:44478/api/user/${username_email}/${password}`, {
       method: "GET"
     })
       .then(response => response.json())

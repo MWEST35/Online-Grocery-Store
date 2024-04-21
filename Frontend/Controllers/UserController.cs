@@ -5,7 +5,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace Frontend.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class UserController : ControllerBase
     {
         //data source=Kalelius\SQLEXPRESS;initial catalog=grocery;user id=sa;password=sixpeasinapod
