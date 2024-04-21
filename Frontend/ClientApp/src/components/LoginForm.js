@@ -5,25 +5,33 @@ export default function LoginForm() {
   const navigate = useNavigate();
   const [username_email, setUsername_email] = useState("");
   const [password, setPassword] = useState("");
-  const [submitted, setSubmitted] = useState(false);
 
   const handleUsername_email = (e) => {
     setUsername_email(e.target.value);
-    setSubmitted(false);
   };
 
   const handlePassword = (e) => {
     setPassword(e.target.value);
-    setSubmitted(false);
   };
+
+  const login = (isValid) => {
+    if (isValid) {
+      navigate('/products');
+    }
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (username_email !== "" && password !== "") {
-      setSubmitted(true);
-      navigate('/products');
-    }
+    fetch(`http://localhost:44478/user/${username_email}/${password}`, {
+      method: "GET"
+    })
+      .then(response => response.json())
+      .then(result => login(result))
+      .catch(error => console.log("Error: ", error));
   };
+
+
+  
 
   return (
     <div className="Login">

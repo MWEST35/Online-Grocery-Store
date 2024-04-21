@@ -25,14 +25,14 @@
     justify-content: center;
     justify-self: center;
     height: min-content;
-    width: 500px;
+    width: min-content;
     box-shadow: 0 4px 8px 0 #596d4d, 0 6px 20px 0 #596d4d;
     background-color: #D4E7C5;
     border-width: 4px;
     border-radius: 2px;
     border-style: solid;
     border-color: #99BC85;
-    padding: 10px 0px 25px 0px;
+    padding: 10px 10px 25px 10px;
     grid-row: 2 / 3;
     grid-column: 2 / 3;
 }
