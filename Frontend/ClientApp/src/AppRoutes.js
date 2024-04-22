@@ -1,6 +1,7 @@
 import { Login } from "./components/Login";
 import { Products } from "./components/Products";
 import { Register } from "./components/Register";
+import { Account } from "./components/Account";
 
 const AppRoutes = [
   {
@@ -14,6 +15,10 @@ const AppRoutes = [
   {
       path: "/products",
       element: <Products />
+  },
+  {
+    path: "/account",
+    element: <Account />
   }
 ];
 

@@ -191,3 +191,42 @@
     .cart-item button {
         margin-left: auto; /* Align the button to the right */
     }
+
+.Account {
+    font-family: "Leelawadee UI";
+    font-size: 20px;
+    text-align: left;
+    justify-content: center;
+    justify-self: center;
+    height: min-content;
+    width: min-content;
+    display: grid;
+    grid-template-columns: 1fr 25px 1fr;
+    box-shadow: 0 4px 8px 0 #596d4d, 0 6px 20px 0 #596d4d;
+    background-color: #d4e7c5;
+    border-width: 4px;
+    border-radius: 2px;
+    border-style: solid;
+    border-color: #99bc85;
+    padding: 10px 25px 25px 25px;
+    grid-row: 2 / 3;
+    grid-column: 2 / 3;
+}
+
+.Account-Info {
+    text-wrap: nowrap;
+    grid-column: 1 / 2;
+}
+
+.Personal-Info {
+    text-wrap: nowrap;
+    grid-column: 3 / 4;
+}
+
+.text-box-info {
+    display: block;
+}
+
+ul {
+    margin: 0px;
+}
