@@ -60,11 +60,14 @@ export default function AccountForm() {
       case "password":
         setEditAccount({ password: true });
         break;
+      default:
+        break;
     }
   };
 
   const handleSubmitAccount = (e) => {
     e.preventDefault();
+    setAccountChanged();
     setEditAccount({
       username: false,
       email: false,
@@ -95,6 +98,8 @@ export default function AccountForm() {
         break;
       case "shipping":
         setEditPersonal({ shipping: true });
+        break;
+      default:
         break;
     }
   };
@@ -181,6 +186,7 @@ export default function AccountForm() {
 
   const handleSubmitPersonal = (e) => {
     e.preventDefault();
+    changePersonalChanged();
     setEditPersonal({
       name: false,
       phone: false,
