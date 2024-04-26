@@ -9,7 +9,7 @@ export class Register extends Component {
     return (
       <div className="Container">
         <img
-          src="https://en.expensereduction.com/wp-content/uploads/2018/02/logo-placeholder-300x68.png"
+          src="https://i.imgur.com/1dK701w.png"
           alt="logo"
           className="logo"
           draggable="false"

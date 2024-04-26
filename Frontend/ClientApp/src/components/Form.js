@@ -75,7 +75,7 @@ export default function Form() {
         {errorMessage()}
         {successMessage()}
       </div>
-      <form>
+      <form onSubmit={handleSubmit}>
         {/* Labels and inputs for form date */}
         <label className="input-label">Name</label>
         <br />
@@ -107,7 +107,7 @@ export default function Form() {
           required
         />
         <br />
-        <input onClick={handleSubmit} className="button" type="submit" value="Register">
+        <input className="button" type="submit" value="Register">
         </input>
         or
         <button onClick={() => navigate('/ ')} className="button" type="button">
