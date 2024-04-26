@@ -5,11 +5,11 @@ import LoginForm from "./LoginForm";
 export class Login extends Component {
   static displayName = Login.name;
 
-  render() {
+    render() {
     return (
       <div className="Container">
-        <img
-          src="https://en.expensereduction.com/wp-content/uploads/2018/02/logo-placeholder-300x68.png"
+            <img
+                src="https://i.imgur.com/1dK701w.png"
           alt="logo"
           className="logo"
           draggable="false"

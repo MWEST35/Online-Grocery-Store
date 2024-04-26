@@ -14,8 +14,8 @@ namespace Accessors
     {
         SqlConnection IUserAccessor.createConnection()
         {
-            string connString = @"Server=JACK\
-            SQLEXPRESS;Database=onlinegrocery;Trusted_Connection=True;";
+            // TODO: Fill in connection string
+            string connString = @"data source=5ada07625c51;initial catalog=Project_grocery;user id=sa;password=Chocolate@12";
             SqlConnection conn = new SqlConnection(connString);
             return conn;
         }
@@ -41,6 +41,11 @@ namespace Accessors
                 }
             }
             return results;
+        }
+
+        void IUserAccessor.registerUser(string email, string username, string password)
+        {
+            // TODO: Implement registry once database is connected
         }
     }
 }
