@@ -12,28 +12,6 @@ export default function AccountForm() {
   const [password, setPassword] = useState("password");
   const [accountChanged, setAccountChanged] = useState(false);
 
-  const [editPersonal, setEditPersonal] = useState({
-    name: false,
-    phone: false,
-    card: false,
-    shipping: false,
-  });
-  const [name, setName] = useState("First Middle Last");
-  const [phone, setPhone] = useState("134-314-4324");
-  const [card, setCard] = useState({
-    name: "Cardholder Name",
-    num: "1223 123123 12321",
-    date: "12/12",
-    cvv: "100",
-  });
-  const [shipping, setShipping] = useState({
-    address: "1021 N 16th Street",
-    state: "Nebraska",
-    city: "Lincoln",
-    zip: 68151,
-  });
-  const [personalChanged, setPersonalChanged] = useState(false);
-
   const handleUsername = (e) => {
     setUsername(e.target.value);
   };
@@ -44,6 +22,10 @@ export default function AccountForm() {
 
   const handlePassword = (e) => {
     setPassword(e.target.value);
+  };
+
+  const changeAccountChanged = () => {
+    setAccountChanged(!accountChanged);
   };
 
   const changeEditAccount = (e) => {
@@ -75,13 +57,18 @@ export default function AccountForm() {
     });
   };
 
-  const changeAccountChanged = () => {
-    setAccountChanged(!accountChanged);
-  };
+  const [editPersonal, setEditPersonal] = useState({
+    name: false,
+    phone: false,
+  });
+  const [name, setName] = useState("First Middle Last");
+  const [phone, setPhone] = useState("134-314-4324");
+  const [personalChanged, setPersonalChanged] = useState(false);
 
   const changePersonalChanged = () => {
     setPersonalChanged(!personalChanged);
   };
+
   const changeEditPersonal = (e) => {
     if (!personalChanged) {
       changePersonalChanged();
@@ -110,6 +97,55 @@ export default function AccountForm() {
 
   const handlePhone = (e) => {
     setPhone(e.target.value);
+  };
+
+  const handleSubmitPersonal = (e) => {
+    e.preventDefault();
+    changePersonalChanged();
+    setEditPersonal({
+      name: false,
+      phone: false,
+    });
+  };
+
+  const [editCard, setEditCard] = useState({
+    name: false,
+    number: false,
+    cvv: false,
+    date: false,
+  });
+  const [card, setCard] = useState({
+    name: "Cardholder Name",
+    num: "1223 123123 12321",
+    date: "12/12",
+    cvv: "100",
+  });
+  const [cardChanged, setCardChanged] = useState(false);
+
+  const changeCardChanged = (e) => {
+    setCardChanged(!cardChanged);
+  };
+
+  const changeEditCard = (e) => {
+    if (!cardChanged) {
+      changeCardChanged();
+    }
+    switch (e) {
+      case "name":
+        setEditCard({ name: true });
+        break;
+      case "num":
+        setEditCard({ num: true });
+        break;
+      case "cvv":
+        setEditCard({ cvv: true });
+        break;
+      case "date":
+        setEditCard({ date: true });
+        break;
+      default:
+        break;
+    }
   };
 
   const handleCardName = (e) => {
@@ -148,6 +184,57 @@ export default function AccountForm() {
     });
   };
 
+  const handleSubmitCard = (e) => {
+    e.preventDefault();
+    setCardChanged();
+    setEditCard({
+      name: false,
+      num: false,
+      cvv: false,
+      date: false,
+    });
+  };
+
+  const [editShipping, setEditShipping] = useState({
+    address: false,
+    state: false,
+    city: false,
+    zip: false,
+  });
+  const [shipping, setShipping] = useState({
+    address: "1021 N 16th Street",
+    state: "Nebraska",
+    city: "Lincoln",
+    zip: 68151,
+  });
+  const [shippingChanged, setShippingChanged] = useState(false);
+
+  const changeShippingChanged = () => {
+    setShippingChanged(!shippingChanged);
+  };
+
+  const changeEditShipping = (e) => {
+    if (!shippingChanged) {
+      changeShippingChanged();
+    }
+    switch (e) {
+      case "address":
+        setEditShipping({ address: true });
+        break;
+      case "state":
+        setEditShipping({ state: true });
+        break;
+      case "city":
+        setEditShipping({ city: true });
+        break;
+      case "zip":
+        setEditShipping({ zip: true });
+        break;
+      default:
+        break;
+    }
+  };
+
   const handleShippingAddress = (e) => {
     setShipping({
       address: e.target.value,
@@ -184,14 +271,14 @@ export default function AccountForm() {
     });
   };
 
-  const handleSubmitPersonal = (e) => {
+  const handleSubmitShipping = (e) => {
     e.preventDefault();
-    changePersonalChanged();
-    setEditPersonal({
-      name: false,
-      phone: false,
-      card: false,
-      shipping: false
+    setShippingChanged();
+    setEditShipping({
+      address: false,
+      state: false,
+      city: false,
+      zip: false,
     });
   };
 
@@ -213,13 +300,13 @@ export default function AccountForm() {
             />
           </div>
           <div style={{ display: !editAccount.username ? "" : "none" }}>
-            Username: {username}{" "}
             <img
               src="https://cdn5.vectorstock.com/i/1000x1000/95/69/edit-icon-pencil-sign-up-vector-30669569.jpg"
               alt="edit button"
               width="15px"
               onClick={() => changeEditAccount("username")}
-            />
+            />{" "}
+            Username: {username}
           </div>
           <div style={{ display: editAccount.email ? "" : "none" }}>
             <label for="email">Email: </label>
@@ -234,13 +321,13 @@ export default function AccountForm() {
             ></input>
           </div>
           <div style={{ display: !editAccount.email ? "" : "none" }}>
-            Email: {email}{" "}
             <img
               src="https://cdn5.vectorstock.com/i/1000x1000/95/69/edit-icon-pencil-sign-up-vector-30669569.jpg"
               alt="edit button"
               width="15px"
               onClick={() => changeEditAccount("email")}
-            />
+            />{" "}
+            Email: {email}
           </div>
           <div style={{ display: editAccount.password ? "" : "none" }}>
             <label for="password">Password: </label>
@@ -255,13 +342,13 @@ export default function AccountForm() {
             ></input>
           </div>
           <div style={{ display: !editAccount.password ? "" : "none" }}>
-            Password: {password}{" "}
             <img
               src="https://cdn5.vectorstock.com/i/1000x1000/95/69/edit-icon-pencil-sign-up-vector-30669569.jpg"
               alt="edit button"
               width="15px"
               onClick={() => changeEditAccount("password")}
-            />
+            />{" "}
+            Password: {password}
           </div>
           <input
             type="submit"
@@ -286,13 +373,13 @@ export default function AccountForm() {
             />
           </div>
           <div style={{ display: !editPersonal.name ? "" : "none" }}>
-            Name: {name}{" "}
             <img
               src="https://cdn5.vectorstock.com/i/1000x1000/95/69/edit-icon-pencil-sign-up-vector-30669569.jpg"
               alt="edit button"
               width="15px"
               onClick={() => changeEditPersonal("name")}
-            />
+            />{" "}
+            Name: {name}
           </div>
           <div style={{ display: editPersonal.phone ? "" : "none" }}>
             <label for="phone-number">Phone Number: </label>
@@ -307,81 +394,25 @@ export default function AccountForm() {
             ></input>
           </div>
           <div style={{ display: !editPersonal.phone ? "" : "none" }}>
-            Phone Number: {phone}{" "}
             <img
               src="https://cdn5.vectorstock.com/i/1000x1000/95/69/edit-icon-pencil-sign-up-vector-30669569.jpg"
               alt="edit button"
               width="15px"
               onClick={() => changeEditPersonal("phone")}
-            />
+            />{" "}
+            Phone Number: {phone}
           </div>
-          Card Info:{" "}
-          <img
-            src="https://cdn5.vectorstock.com/i/1000x1000/95/69/edit-icon-pencil-sign-up-vector-30669569.jpg"
-            alt="edit button"
-            width="15px"
-            onClick={() => changeEditPersonal("card")}
-            style={{ display: !editPersonal.card ? "" : "none" }}
+          <input
+            type="submit"
+            value="Save Changes"
+            style={{ display: personalChanged ? "" : "none" }}
           />
-          <br />
-          <ul style={{ display: editPersonal.card ? "" : "none" }}>
-            <label for="card-name">Cardholder Name: </label>
-            <input
-              className="text-box-info"
-              id="card-name"
-              name="card-name"
-              type="text"
-              value={card.name}
-              onChange={handleCardName}
-              required
-            ></input>
-            <label for="card-num">Number: </label>
-            <input
-              className="text-box-info"
-              id="card-num"
-              name="card-num"
-              type="text"
-              value={card.num}
-              onChange={handleCardNum}
-              required
-            ></input>
-            <label for="card-cvv">cvv: </label>
-            <input
-              className="text-box-info"
-              id="card-cvv"
-              name="card-cvv"
-              type="text"
-              value={card.cvv}
-              onChange={handleCardCvv}
-              required
-            ></input>
-            <label for="card-date">Exp. Date: </label>
-            <input
-              className="text-box-info"
-              id="card-date"
-              name="card-date"
-              type="text"
-              value={card.date}
-              onChange={handleCardDate}
-              required
-            ></input>
-          </ul>
-          <ul style={{ display: !editPersonal.card ? "" : "none" }}>
-            Name: {card.name} <br />
-            Number: {card.num} <br />
-            CVV: {card.cvv} <br />
-            Exp. Date: {card.date}
-          </ul>
-          Shipping Info:{" "}
-          <img
-            src="https://cdn5.vectorstock.com/i/1000x1000/95/69/edit-icon-pencil-sign-up-vector-30669569.jpg"
-            alt="edit button"
-            width="15px"
-            onClick={() => changeEditPersonal("shipping")}
-            style={{ display: !editPersonal.shipping ? "" : "none" }}
-          />
-          <br />
-          <ul style={{ display: editPersonal.shipping ? "" : "none" }}>
+        </form>
+      </div>
+      <div className="Shipping-Info">
+        <header className="Login-Register-header">Shipping Info</header>
+        <form onSubmit={handleSubmitShipping}>
+          <div style={{ display: editShipping.address ? "" : "none" }}>
             <label for="address">Address: </label>
             <input
               className="text-box-info"
@@ -392,6 +423,17 @@ export default function AccountForm() {
               onChange={handleShippingAddress}
               required
             ></input>
+          </div>
+          <div style={{ display: !editShipping.address ? "" : "none" }}>
+            <img
+              src="https://cdn5.vectorstock.com/i/1000x1000/95/69/edit-icon-pencil-sign-up-vector-30669569.jpg"
+              alt="edit button"
+              width="15px"
+              onClick={() => changeEditShipping("address")}
+            />{" "}
+            Address: {shipping.address} <br />
+          </div>
+          <div style={{ display: editShipping.state ? "" : "none" }}>
             <label for="state">State: </label>
             <input
               className="text-box-info"
@@ -402,6 +444,17 @@ export default function AccountForm() {
               onChange={handleShippingState}
               required
             ></input>
+          </div>
+          <div style={{ display: !editShipping.state ? "" : "none" }}>
+            <img
+              src="https://cdn5.vectorstock.com/i/1000x1000/95/69/edit-icon-pencil-sign-up-vector-30669569.jpg"
+              alt="edit button"
+              width="15px"
+              onClick={() => changeEditShipping("state")}
+            />{" "}
+            State: {shipping.state} <br />
+          </div>
+          <div style={{ display: editShipping.city ? "" : "none" }}>
             <label for="city">City: </label>
             <input
               className="text-box-info"
@@ -412,6 +465,17 @@ export default function AccountForm() {
               onChange={handleShippingCity}
               required
             ></input>
+          </div>
+          <div style={{ display: !editShipping.city ? "" : "none" }}>
+            <img
+              src="https://cdn5.vectorstock.com/i/1000x1000/95/69/edit-icon-pencil-sign-up-vector-30669569.jpg"
+              alt="edit button"
+              width="15px"
+              onClick={() => changeEditShipping("city")}
+            />{" "}
+            City: {shipping.city} <br />
+          </div>
+          <div style={{ display: editShipping.zip ? "" : "none" }}>
             <label for="zip">Zip Code: </label>
             <input
               className="text-box-info"
@@ -422,17 +486,114 @@ export default function AccountForm() {
               onChange={handleShippingZip}
               required
             ></input>
-          </ul>
-          <ul style={{ display: !editPersonal.shipping ? "" : "none" }}>
-            Address: {shipping.address} <br />
-            State: {shipping.state} <br />
-            City: {shipping.city} <br />
+          </div>
+          <div style={{ display: !editShipping.zip ? "" : "none" }}>
+            <img
+              src="https://cdn5.vectorstock.com/i/1000x1000/95/69/edit-icon-pencil-sign-up-vector-30669569.jpg"
+              alt="edit button"
+              width="15px"
+              onClick={() => changeEditShipping("zip")}
+            />{" "}
             ZIP: {shipping.zip}
-          </ul>
+          </div>
           <input
             type="submit"
             value="Save Changes"
-            style={{ display: personalChanged ? "" : "none" }}
+            style={{ display: shippingChanged ? "" : "none" }}
+          />
+        </form>
+      </div>
+      <div className="Card-Info">
+        <header className="Login-Register-header">Card Info</header>
+        <form onSubmit={handleSubmitCard}>
+          <div style={{ display: editCard.name ? "" : "none" }}>
+            <label for="card-name">Cardholder Name: </label>
+            <input
+              className="text-box-info"
+              id="card-name"
+              name="card-name"
+              type="text"
+              value={card.name}
+              onChange={handleCardName}
+              required
+            ></input>
+          </div>
+          <div style={{ display: !editCard.name ? "" : "none" }}>
+            <img
+              src="https://cdn5.vectorstock.com/i/1000x1000/95/69/edit-icon-pencil-sign-up-vector-30669569.jpg"
+              alt="edit button"
+              width="15px"
+              onClick={() => changeEditCard("name")}
+            />{" "}
+            Name: {card.name} <br />
+          </div>
+          <div style={{ display: editCard.num ? "" : "none" }}>
+            <label for="card-num">Number: </label>
+            <input
+              className="text-box-info"
+              id="card-num"
+              name="card-num"
+              type="text"
+              value={card.num}
+              onChange={handleCardNum}
+              required
+            ></input>
+          </div>
+          <div style={{ display: !editCard.num ? "" : "none" }}>
+            <img
+              src="https://cdn5.vectorstock.com/i/1000x1000/95/69/edit-icon-pencil-sign-up-vector-30669569.jpg"
+              alt="edit button"
+              width="15px"
+              onClick={() => changeEditCard("num")}
+            />{" "}
+            Number: {card.num} <br />
+          </div>
+          <div style={{ display: editCard.cvv ? "" : "none" }}>
+            <label for="card-cvv">CVV: </label>
+            <input
+              className="text-box-info"
+              id="card-cvv"
+              name="card-cvv"
+              type="text"
+              value={card.cvv}
+              onChange={handleCardCvv}
+              required
+            ></input>
+          </div>
+          <div style={{ display: !editCard.cvv ? "" : "none" }}>
+            <img
+              src="https://cdn5.vectorstock.com/i/1000x1000/95/69/edit-icon-pencil-sign-up-vector-30669569.jpg"
+              alt="edit button"
+              width="15px"
+              onClick={() => changeEditCard("cvv")}
+            />{" "}
+            CVV: {card.cvv} <br />
+          </div>
+          <div style={{ display: editCard.date ? "" : "none" }}>
+            <label for="card-date">Exp. Date: </label>
+            <input
+              className="text-box-info"
+              id="card-date"
+              name="card-date"
+              type="text"
+              value={card.date}
+              onChange={handleCardDate}
+              required
+            ></input>
+          </div>
+          <div style={{ display: !editCard.date ? "" : "none" }}>
+            <img
+              src="https://cdn5.vectorstock.com/i/1000x1000/95/69/edit-icon-pencil-sign-up-vector-30669569.jpg"
+              alt="edit button"
+              width="15px"
+              onClick={() => changeEditCard("date")}
+            />{" "}
+            Exp. Date: {card.date}
+          </div>
+          <input
+            type="submit"
+            value="Save Changes"
+            style={{ display: cardChanged ? "" : "none" }}
           />
         </form>
       </div>
