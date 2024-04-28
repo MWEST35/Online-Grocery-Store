@@ -2,6 +2,8 @@ import { Login } from "./components/Login";
 import  ProductView from "./components/ProductView";
 import { Products } from "./components/Products";
 import { Register } from "./components/Register";
+import { Account } from "./components/Account";
+import { Checkout } from "./components/Checkout";
 
 const products = [{
     id: 1,
@@ -68,12 +70,20 @@ const AppRoutes = [
   {
       path: "/products",
       element: <Products />
-    },
 
+  },
   {
       path: "/products/:productId",
       element: < ProductView products={ products } />
-  }
+  },
+  {
+    path: "/account",
+    element: <Account />
+  },
+  {
+    path: "/checkout",
+    element: <Checkout />
+    }
 ];
 
 
