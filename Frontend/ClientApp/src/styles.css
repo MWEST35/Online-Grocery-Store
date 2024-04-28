@@ -187,7 +187,75 @@
     .cart-item p {
         margin: 0;
     }
+.cart-item button {
+    margin-left: auto;
+}
 
+.view-product-link {
+    font-size: 16px;
+    background-color: #99BC85;
+    color: black;
+    padding: 8px 16px;
+    border: 1px solid #99BC85; 
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+}
+
+.view-product-link:hover {
+        background-color: #88a876;
+}
+
+.button-container {
+    margin-top: 15px;
+}
+
+/* Update the styles for the ProductDetails component */
+.ProductDetails {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    max-width: 800px; /* Limit the maximum width of the product details */
+    margin: auto; /* Center the product details horizontally */
+    text-align: center; /* Center the text */
+}
+
+    .ProductDetails img {
+        width: 100%; /* Set the width to 100% to make the images fill the container */
+        max-height: 500px; /* Set a maximum height to prevent images from becoming too large */
+        object-fit: contain; /* Maintain aspect ratio and crop if necessary */
+    }
+
+    .ProductDetails h2 {
+        font-size: 32px; /* Increase the font size */
+        margin-bottom: 20px; /* Add more spacing below the heading */
+    }
+
+    .ProductDetails p {
+        font-size: 20px; /* Increase the font size */
+        margin-bottom: 15px; /* Add more spacing below each paragraph */
+    }
+
+    .ProductDetails .back-link {
+        background-color: #99BC85;
+        color: black;
+        padding: 10px 20px;
+        margin-top: 20px; /* Add more spacing above the back button */
+        border: 1px solid #99BC85;
+        border-radius: 5px;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background-color 0.3s, box-shadow 0.3s;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+        .ProductDetails .back-link:hover {
+            background-color: #88a876;
+        }
     .cart-item button {
         margin-left: auto; /* Align the button to the right */
     }
