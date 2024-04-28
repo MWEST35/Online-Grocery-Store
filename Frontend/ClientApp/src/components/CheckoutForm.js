@@ -1,113 +1,7 @@
 ﻿import "../styles.css";
 import { useState } from "react";
 
-export default function AccountForm() {
-  const [editAccount, setEditAccount] = useState({
-    username: false,
-    email: false,
-    password: false,
-  });
-  const [username, setUsername] = useState("Username");
-  const [email, setEmail] = useState("Email@email");
-  const [password, setPassword] = useState("password");
-  const [accountChanged, setAccountChanged] = useState(false);
-
-  const handleUsername = (e) => {
-    setUsername(e.target.value);
-  };
-
-  const handleEmail = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handlePassword = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const changeAccountChanged = () => {
-    setAccountChanged(!accountChanged);
-  };
-
-  const changeEditAccount = (e) => {
-    if (!accountChanged) {
-      changeAccountChanged();
-    }
-    switch (e) {
-      case "username":
-        setEditAccount({ username: true });
-        break;
-      case "email":
-        setEditAccount({ email: true });
-        break;
-      case "password":
-        setEditAccount({ password: true });
-        break;
-      default:
-        break;
-    }
-  };
-
-  const handleSubmitAccount = (e) => {
-    e.preventDefault();
-    setAccountChanged();
-    setEditAccount({
-      username: false,
-      email: false,
-      password: false,
-    });
-  };
-
-  const [editPersonal, setEditPersonal] = useState({
-    name: false,
-    phone: false,
-  });
-  const [name, setName] = useState("First Middle Last");
-  const [phone, setPhone] = useState("134-314-4324");
-  const [personalChanged, setPersonalChanged] = useState(false);
-
-  const changePersonalChanged = () => {
-    setPersonalChanged(!personalChanged);
-  };
-
-  const changeEditPersonal = (e) => {
-    if (!personalChanged) {
-      changePersonalChanged();
-    }
-    switch (e) {
-      case "name":
-        setEditPersonal({ name: true });
-        break;
-      case "phone":
-        setEditPersonal({ phone: true });
-        break;
-      case "card":
-        setEditPersonal({ card: true });
-        break;
-      case "shipping":
-        setEditPersonal({ shipping: true });
-        break;
-      default:
-        break;
-    }
-  };
-
-  const handleName = (e) => {
-    setName(e.target.value);
-  };
-
-  const handlePhone = (e) => {
-    setPhone(e.target.value);
-  };
-
-  const handleSubmitPersonal = (e) => {
-    e.preventDefault();
-    changePersonalChanged();
-    setEditPersonal({
-      name: false,
-      phone: false,
-    });
-  };
-
+export default function CheckoutForm() {
   const [editCard, setEditCard] = useState({
     name: false,
     number: false,
@@ -282,136 +176,13 @@ export default function AccountForm() {
     });
   };
 
+  const [subtotal, setSubtotal] = useState("$21.50");
+  const [tax, setTax] = useState("$1.50");
+  const [total, setTotal] = useState("$23.50");
+
   return (
-    <div className="Account">
-      <div className="Account-Info">
-        <header className="Login-Register-header">Account Info</header>
-        <form onSubmit={handleSubmitAccount}>
-          <div style={{ display: editAccount.username ? "" : "none" }}>
-            <label for="username">Username: </label>
-            <input
-              className="text-box-info"
-              id="username"
-              name="username"
-              type="text"
-              value={username}
-              onChange={handleUsername}
-              required
-            />
-          </div>
-          <div style={{ display: !editAccount.username ? "" : "none" }}>
-            <img
-              src="https://cdn5.vectorstock.com/i/1000x1000/95/69/edit-icon-pencil-sign-up-vector-30669569.jpg"
-              alt="edit button"
-              width="15px"
-              onClick={() => changeEditAccount("username")}
-            />{" "}
-            Username: {username}
-          </div>
-          <div style={{ display: editAccount.email ? "" : "none" }}>
-            <label for="email">Email: </label>
-            <input
-              className="text-box-info"
-              id="Email"
-              name="Email"
-              type="email"
-              value={email}
-              onChange={handleEmail}
-              required
-            ></input>
-          </div>
-          <div style={{ display: !editAccount.email ? "" : "none" }}>
-            <img
-              src="https://cdn5.vectorstock.com/i/1000x1000/95/69/edit-icon-pencil-sign-up-vector-30669569.jpg"
-              alt="edit button"
-              width="15px"
-              onClick={() => changeEditAccount("email")}
-            />{" "}
-            Email: {email}
-          </div>
-          <div style={{ display: editAccount.password ? "" : "none" }}>
-            <label for="password">Password: </label>
-            <input
-              className="text-box-info"
-              id="password"
-              name="password"
-              type="text"
-              value={password}
-              onChange={handlePassword}
-              required
-            ></input>
-          </div>
-          <div style={{ display: !editAccount.password ? "" : "none" }}>
-            <img
-              src="https://cdn5.vectorstock.com/i/1000x1000/95/69/edit-icon-pencil-sign-up-vector-30669569.jpg"
-              alt="edit button"
-              width="15px"
-              onClick={() => changeEditAccount("password")}
-            />{" "}
-            Password: {password}
-          </div>
-          <input
-            className="button-smaller"
-            type="submit"
-            value="Save Changes"
-            style={{ display: accountChanged ? "" : "none" }}
-          />
-        </form>
-      </div>
-      <div className="Personal-Info">
-        <header className="Login-Register-header">Personal Info</header>
-        <form onSubmit={handleSubmitPersonal}>
-          <div style={{ display: editPersonal.name ? "" : "none" }}>
-            <label for="name">Name: </label>
-            <input
-              className="text-box-info"
-              id="name"
-              name="name"
-              type="text"
-              value={name}
-              onChange={handleName}
-              required
-            />
-          </div>
-          <div style={{ display: !editPersonal.name ? "" : "none" }}>
-            <img
-              src="https://cdn5.vectorstock.com/i/1000x1000/95/69/edit-icon-pencil-sign-up-vector-30669569.jpg"
-              alt="edit button"
-              width="15px"
-              onClick={() => changeEditPersonal("name")}
-            />{" "}
-            Name: {name}
-          </div>
-          <div style={{ display: editPersonal.phone ? "" : "none" }}>
-            <label for="phone-number">Phone Number: </label>
-            <input
-              className="text-box-info"
-              id="phone-number"
-              name="phone-number"
-              type="phone"
-              value={phone}
-              onChange={handlePhone}
-              required
-            ></input>
-          </div>
-          <div style={{ display: !editPersonal.phone ? "" : "none" }}>
-            <img
-              src="https://cdn5.vectorstock.com/i/1000x1000/95/69/edit-icon-pencil-sign-up-vector-30669569.jpg"
-              alt="edit button"
-              width="15px"
-              onClick={() => changeEditPersonal("phone")}
-            />{" "}
-            Phone Number: {phone}
-          </div>
-          <input
-            className="button-smaller"
-            type="submit"
-            value="Save Changes"
-            style={{ display: personalChanged ? "" : "none" }}
-          />
-        </form>
-      </div>
-      <div className="Shipping-Info">
+    <div className="Checkout">
+      <div className="Shipping-Info-Checkout">
         <header className="Login-Register-header">Shipping Info</header>
         <form onSubmit={handleSubmitShipping}>
           <div style={{ display: editShipping.address ? "" : "none" }}>
@@ -506,7 +277,7 @@ export default function AccountForm() {
           />
         </form>
       </div>
-      <div className="Card-Info">
+      <div className="Card-Info-Checkout">
         <header className="Login-Register-header">Card Info</header>
         <form onSubmit={handleSubmitCard}>
           <div style={{ display: editCard.name ? "" : "none" }}>
@@ -600,6 +371,12 @@ export default function AccountForm() {
             style={{ display: cardChanged ? "" : "none" }}
           />
         </form>
+      </div>
+      <div className="cart-info">
+        Subtotal: {subtotal} Tax: {tax} Total: {total}
+        <br />
+        <button className="button-smaller">Check Out</button> or{" "}
+        <button className="button-smaller">Edit Cart</button>
       </div>
     </div>
   );

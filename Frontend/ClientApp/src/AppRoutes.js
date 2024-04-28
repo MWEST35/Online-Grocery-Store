@@ -2,6 +2,7 @@ import { Login } from "./components/Login";
 import { Products } from "./components/Products";
 import { Register } from "./components/Register";
 import { Account } from "./components/Account";
+import { Checkout } from "./components/Checkout";
 
 const AppRoutes = [
   {
@@ -19,6 +20,10 @@ const AppRoutes = [
   {
     path: "/account",
     element: <Account />
+  },
+  {
+    path: "/checkout",
+    element: <Checkout />
   }
 ];
 
