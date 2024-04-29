@@ -8,5 +8,8 @@ namespace Accessors
 {
     internal interface ICartAccessor
     {
+        List<string> retrieveItems(string cartId);
+
+
     }
 }
