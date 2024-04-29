@@ -14,5 +14,6 @@ namespace Accessors
 
         string retrieveCart(string userId);
         void registerUser(string email, string username, string password);
+
     }
 }
