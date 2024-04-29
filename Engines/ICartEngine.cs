@@ -8,13 +8,13 @@ namespace Engines
 {
     internal interface ICartEngine
     {
-        // Allows printing a single item's cost for receipt
+        // Allows printing a single item's cost to two decimal places for receipt
         double calculateItemCost(double salePct, int units, double pricePerUnit);
 
         // Allows printing the taxless total for receipt
         double calculateTotal(List<double> itemCosts);
 
-        // Generates the total
+        // Generates the total to two decimal places
         double totalWithTax(double gross, string state);
     }
 }

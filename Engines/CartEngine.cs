@@ -10,13 +10,13 @@ namespace Engines
     public class CartEngine
     {
 
-        double calculateItemCost(double salePct, int units, double pricePerUnit)
+        public double calculateItemCost(double salePct, int units, double pricePerUnit)
         {
             double saleApplied = pricePerUnit * (1 - salePct);
-            return (salePct * units);
+            return Math.Round((saleApplied * units), 2);
         }
 
-        double calculateTotal(List<double> itemCosts)
+        public double calculateTotal(List<double> itemCosts)
         {
             double gross = 0;
             for (int i = 0; i < itemCosts.Count; i++)
@@ -26,7 +26,7 @@ namespace Engines
             return gross;
         }
 
-        double totalWithTax(double gross, string state)
+        public double calculateTotalWithTax(double gross, string state = "")
         {
             double taxRate = 0;
             // Find the tax rate for the user's state of residence. Defaults to NE
@@ -190,7 +190,7 @@ namespace Engines
                     break;
             }
 
-            return (gross + (gross * taxRate));
+            return Math.Round(gross + (gross * taxRate), 2);
         }
     }
 }
