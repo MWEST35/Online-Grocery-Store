@@ -187,7 +187,194 @@
     .cart-item p {
         margin: 0;
     }
+.cart-item button {
+    margin-left: auto;
+}
 
+.view-product-link {
+    font-size: 16px;
+    background-color: #99BC85;
+    color: black;
+    padding: 8px 16px;
+    border: 1px solid #99BC85; 
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+}
+
+.view-product-link:hover {
+        background-color: #88a876;
+}
+
+.button-container {
+    margin-top: 15px;
+}
+
+/* Update the styles for the ProductDetails component */
+.ProductDetails {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    max-width: 800px; /* Limit the maximum width of the product details */
+    margin: auto; /* Center the product details horizontally */
+    text-align: center; /* Center the text */
+}
+
+    .ProductDetails img {
+        width: 100%; /* Set the width to 100% to make the images fill the container */
+        max-height: 500px; /* Set a maximum height to prevent images from becoming too large */
+        object-fit: contain; /* Maintain aspect ratio and crop if necessary */
+    }
+
+    .ProductDetails h2 {
+        font-size: 32px; /* Increase the font size */
+        margin-bottom: 20px; /* Add more spacing below the heading */
+    }
+
+    .ProductDetails p {
+        font-size: 20px; /* Increase the font size */
+        margin-bottom: 15px; /* Add more spacing below each paragraph */
+    }
+
+    .ProductDetails .back-link {
+        background-color: #99BC85;
+        color: black;
+        padding: 10px 20px;
+        margin-top: 20px; /* Add more spacing above the back button */
+        border: 1px solid #99BC85;
+        border-radius: 5px;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background-color 0.3s, box-shadow 0.3s;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+        .ProductDetails .back-link:hover {
+            background-color: #88a876;
+        }
     .cart-item button {
         margin-left: auto; /* Align the button to the right */
+    }
+
+.Account {
+    font-family: "Leelawadee UI";
+    font-size: 20px;
+    text-align: left;
+    justify-content: center;
+    justify-self: center;
+    height: min-content;
+    width: min-content;
+    display: grid;
+    grid-template-columns: 1fr 25px 1fr;
+    grid-template-rows: min-content min-content;
+    box-shadow: 0 4px 8px 0 #596d4d, 0 6px 20px 0 #596d4d;
+    background-color: #d4e7c5;
+    border-width: 4px;
+    border-radius: 2px;
+    border-style: solid;
+    border-color: #99bc85;
+    padding: 10px 25px 25px 25px;
+    grid-row: 2 / 3;
+    grid-column: 2 / 3;
+}
+
+.Account-Info {
+    font-size: 20px;
+    white-space: nowrap;
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+}
+
+.Personal-Info {
+    font-size: 20px;
+    white-space: nowrap;
+    grid-column: 3 / 4;
+    grid-row: 1 / 2;
+    padding-bottom: 0px;
+}
+
+.Shipping-Info {
+    font-size: 20px;
+    white-space: nowrap;
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+}
+
+.Card-Info {
+    font-size: 20px;
+    white-space: nowrap;
+    grid-column: 3 / 4;
+    grid-row: 2 / 3;
+}
+
+.text-box-info {
+    display: block;
+}
+
+.Checkout {
+    font-family: "Leelawadee UI";
+    font-size: 20px;
+    text-align: left;
+    justify-content: center;
+    justify-self: center;
+    height: min-content;
+    width: min-content;
+    display: grid;
+    grid-template-columns: 1fr 25px 1fr;
+    grid-template-rows: min-content min-content;
+    box-shadow: 0 4px 8px 0 #596d4d, 0 6px 20px 0 #596d4d;
+    background-color: #d4e7c5;
+    border-width: 4px;
+    border-radius: 2px;
+    border-style: solid;
+    border-color: #99bc85;
+    padding: 10px 25px 25px 25px;
+    grid-row: 2 / 3;
+    grid-column: 2 / 3;
+}
+
+.Shipping-Info-Checkout {
+    white-space: nowrap;
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+}
+
+.Card-Info-Checkout {
+    white-space: nowrap;
+    grid-column: 3 / 4;
+    grid-row: 1 / 2;
+}
+
+.cart-info {
+    align-self: center;
+    text-align: center;
+    justify-self: center;
+    display: inline-block;
+    white-space: nowrap;
+    width: min-content;
+    height: min-content;
+    padding-top: 25px;
+    grid-column: 1 / 4;
+    grid-row: 2 / 3;
+}
+
+.button-smaller {
+    font-family: Calibri;
+    font-size: 20px;
+    background-color: #bfd8af;
+    border-color: #99bc85;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 2px;
+    margin-top: 5px;
+}
+
+    .button-smaller:active {
+        color: azure;
+        background-color: #99bc85;
+        transform: scale(105%);
     }
