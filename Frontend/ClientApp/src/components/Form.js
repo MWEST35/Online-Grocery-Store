@@ -9,6 +9,7 @@ export default function Form() {
   //check for errors
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(false);
+  const [existsError, setExistsError] = useState(false);
 
   //handle name change
   const handleName = (e) => {
@@ -26,7 +27,19 @@ export default function Form() {
   const handlePassword = (e) => {
     setPassword(e.target.value);
     setSubmitted(false);
-  };
+    };
+
+    const register = (isValid) => {
+        if (isValid) {
+            setSubmitted(true);
+            setError(false);
+            setExistsError(false);
+            navigate('/products');
+        } else {
+            setExistsError(true);
+        }
+    };
+
 
   //handle form submission
   const handleSubmit = (e) => {
@@ -34,9 +47,23 @@ export default function Form() {
     if (name === "" || email === "" || password === "") {
       setError(true);
     } else {
-      setSubmitted(true);
-      setError(false);
-      navigate('/products')
+
+        const userInfo = {
+            Name: name,
+            Email: email,
+            Password: password,
+        };
+      fetch(`http://localhost:44478/api/user`, {
+          method: "POST",
+          headers: {
+              'Accept': 'application/json',
+              'Content-Type':'application/json'
+          },
+          body: JSON.stringify(userInfo),
+      })
+          .then(response => response.json())
+          .then(result => register(result))
+          .catch(error => console.log("Error: ", error));
     }
   };
 
@@ -54,6 +81,7 @@ export default function Form() {
     );
   };
 
+  //show empty field error message
   const errorMessage = () => {
     return (
       <div
@@ -67,12 +95,27 @@ export default function Form() {
     );
   };
 
+  //show user already exists error message
+  const existsErrorMessage = () => {
+    return (
+      <div
+        className="existsError"
+        style={{
+          display: existsError ? "" : "none",
+        }}
+      >
+        <h1>User already exists</h1>
+      </div>
+    );
+  };
+
   return (
     <div className="Register">
       <header className="Login-Register-header">Register</header>
       {/* Calling to methods */}
       <div className="messages">
         {errorMessage()}
+        {existsErrorMessage()}
         {successMessage()}
       </div>
       <form onSubmit={handleSubmit}>
