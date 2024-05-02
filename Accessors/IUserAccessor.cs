@@ -11,5 +11,8 @@ namespace Accessors
     {
         SqlConnection createConnection();
         List<string> validateAccount(string username, string password);
+
+        string retrieveCart(string userId);
+        void registerUser(string email, string username, string password);
     }
 }
