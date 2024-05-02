@@ -1,15 +1,17 @@
 ﻿import "../styles.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function AccountForm() {
+  const [userId, setUserId] = useState(0);
+
   const [editAccount, setEditAccount] = useState({
     username: false,
     email: false,
     password: false,
   });
-  const [username, setUsername] = useState("Username");
-  const [email, setEmail] = useState("Email@email");
-  const [password, setPassword] = useState("password");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [accountChanged, setAccountChanged] = useState(false);
 
   const handleUsername = (e) => {
@@ -55,14 +57,20 @@ export default function AccountForm() {
       email: false,
       password: false,
     });
+    fetch(`http://localhost:44478/api/user/${userId}/${username}/${email}/${password}`, {
+      method: 'PUT',
+    })
+      .then(response => response.json())
+      .then(result => console.log("result"))
+      .catch(error => console.log("Error: ", error));
   };
 
   const [editPersonal, setEditPersonal] = useState({
     name: false,
     phone: false,
   });
-  const [name, setName] = useState("First Middle Last");
-  const [phone, setPhone] = useState("134-314-4324");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
   const [personalChanged, setPersonalChanged] = useState(false);
 
   const changePersonalChanged = () => {
@@ -106,6 +114,12 @@ export default function AccountForm() {
       name: false,
       phone: false,
     });
+    fetch(`http://localhost:44478/api/user/${userId}/${name}/${phone}`, {
+      method: 'PUT',
+    })
+      .then(response => response.json())
+      .then(result => console.log("result"))
+      .catch(error => console.log("Error: ", error));
   };
 
   const [editCard, setEditCard] = useState({
@@ -115,10 +129,10 @@ export default function AccountForm() {
     date: false,
   });
   const [card, setCard] = useState({
-    name: "Cardholder Name",
-    num: "1223 123123 12321",
-    date: "12/12",
-    cvv: "100",
+    name: "",
+    num: "",
+    date: "",
+    cvv: "",
   });
   const [cardChanged, setCardChanged] = useState(false);
 
@@ -193,6 +207,12 @@ export default function AccountForm() {
       cvv: false,
       date: false,
     });
+    fetch(`http://localhost:44478/api/card/${userId}/${card.name}/${card.num}/${card.cvv}/${card.date}`, {
+      method: 'PUT',
+    })
+      .then(response => response.json())
+      .then(result => console.log("result"))
+      .catch(error => console.log("Error: ", error));
   };
 
   const [editShipping, setEditShipping] = useState({
@@ -202,10 +222,10 @@ export default function AccountForm() {
     zip: false,
   });
   const [shipping, setShipping] = useState({
-    address: "1021 N 16th Street",
-    state: "Nebraska",
-    city: "Lincoln",
-    zip: 68151,
+    address: "",
+    state: "",
+    city: "",
+    zip: 0,
   });
   const [shippingChanged, setShippingChanged] = useState(false);
 
@@ -280,7 +300,53 @@ export default function AccountForm() {
       city: false,
       zip: false,
     });
+    fetch(`http://localhost:44478/api/shipping/${userId}/${shipping.address}/${shipping.state}/${shipping.city}/${shipping.zip}`, {
+      method: 'PUT',
+    })
+      .then(response => response.json())
+      .then(result => console.log("result"))
+      .catch(error => console.log("Error: ", error));
   };
+
+  const initAccountPersonal = (account_personal) => {
+    setUsername(account_personal[0]);
+    setEmail(account_personal[1]);
+    setPassword(account_personal[2]);
+    setName(account_personal[3]);
+    setPhone(account_personal[4]);
+  }
+
+  const initShipping = (shipping) => {
+    setShipping({ address: shipping[0], state: shipping[1], city: shipping[2], zip: shipping[3] });
+  }
+
+  const initCard = (card) => {
+    setCard({ name: card[0], num: card[1], date: card[2], cvv: card[3] });
+  }
+
+  useEffect(() => {
+    //need to figure out how to store userId for the session
+    setUserId(1);
+    fetch(`http://localhost:44478/api/user/${userId}`, {
+      method: 'GET',
+    })
+      .then(response => response.json())
+      .then(result => initAccountPersonal(result))
+      .catch(error => console.log("Error: ", error));
+    fetch(`http://localhost:44478/api/shipping/${userId}`, {
+      method: 'GET',
+    })
+      .then(response => response.json())
+      .then(result => initShipping(result))
+      .catch(error => console.log("Error: ", error));
+    fetch(`http://localhost:44478/api/card/${userId}`, {
+      method: 'GET',
+    })
+      .then(response => response.json())
+      .then(result => initShipping(result))
+      .catch(error => console.log("Error: ", error));
+    setCard({ name: "Name", num: "1234 2132 42144", date: "12/12", cvv: "123" });
+  }, [userId]);
 
   return (
     <div className="Account">

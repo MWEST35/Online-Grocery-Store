@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Accessors
 {
-    internal class UserAccessor : IUserAccessor
+    public class UserAccessor : IUserAccessor
     {
         SqlConnection IUserAccessor.createConnection()
         {
