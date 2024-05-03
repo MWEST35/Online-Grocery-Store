@@ -321,7 +321,7 @@ export default function AccountForm() {
   }
 
   const initCard = (card) => {
-    setCard({ name: card[0], num: card[1], date: card[2], cvv: card[3] });
+    setCard({ name: card[0], num: card[1], cvv: card[2], date: card[3] });
   }
 
   useEffect(() => {
@@ -343,9 +343,8 @@ export default function AccountForm() {
       method: 'GET',
     })
       .then(response => response.json())
-      .then(result => initShipping(result))
+      .then(result => initCard(result))
       .catch(error => console.log("Error: ", error));
-    setCard({ name: "Name", num: "1234 2132 42144", date: "12/12", cvv: "123" });
   }, [userId]);
 
   return (

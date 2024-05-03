@@ -1,7 +1,9 @@
 ﻿import "../styles.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function CheckoutForm() {
+  const [userId, setUserId] = useState(0);
+
   const [editCard, setEditCard] = useState({
     name: false,
     number: false,
@@ -87,6 +89,12 @@ export default function CheckoutForm() {
       cvv: false,
       date: false,
     });
+    fetch(`http://localhost:44478/api/card/${userId}/${card.name}/${card.num}/${card.cvv}/${card.date}`, {
+      method: 'PUT',
+    })
+      .then(response => response.json())
+      .then(result => console.log("result"))
+      .catch(error => console.log("Error: ", error));
   };
 
   const [editShipping, setEditShipping] = useState({
@@ -174,7 +182,38 @@ export default function CheckoutForm() {
       city: false,
       zip: false,
     });
+    fetch(`http://localhost:44478/api/shipping/${userId}/${shipping.address}/${shipping.state}/${shipping.city}/${shipping.zip}`, {
+      method: 'PUT',
+    })
+      .then(response => response.json())
+      .then(result => console.log("result"))
+      .catch(error => console.log("Error: ", error));
   };
+
+  const initShipping = (shipping) => {
+    setShipping({ address: shipping[0], state: shipping[1], city: shipping[2], zip: shipping[3] });
+  }
+
+  const initCard = (card) => {
+    setCard({ name: card[0], num: card[1], cvv: card[2], date: card[3] });
+  }
+
+  useEffect(() => {
+    //need to figure out how to store userId for the session
+    setUserId(1);
+    fetch(`http://localhost:44478/api/shipping/${userId}`, {
+      method: 'GET',
+    })
+      .then(response => response.json())
+      .then(result => initShipping(result))
+      .catch(error => console.log("Error: ", error));
+    fetch(`http://localhost:44478/api/card/${userId}`, {
+      method: 'GET',
+    })
+      .then(response => response.json())
+      .then(result => initCard(result))
+      .catch(error => console.log("Error: ", error));
+  }, [userId]);
 
   const [subtotal, setSubtotal] = useState("$21.50");
   const [tax, setTax] = useState("$1.50");

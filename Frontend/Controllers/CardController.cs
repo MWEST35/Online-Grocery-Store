@@ -60,7 +60,7 @@ namespace Frontend.Controllers
             using (SqlCommand cmd = new SqlCommand(query))
             {
                 cmd.Parameters.Add("@name", System.Data.SqlDbType.NVarChar, 50);
-                cmd.Parameters.Add("@num", System.Data.SqlDbType.NVarChar, 16);
+                cmd.Parameters.Add("@num", System.Data.SqlDbType.NVarChar, 19);
                 cmd.Parameters.Add("@cvv", System.Data.SqlDbType.NVarChar, 3);
                 cmd.Parameters.Add("@date", System.Data.SqlDbType.NVarChar, 5);
                 cmd.Parameters.Add("@id", System.Data.SqlDbType.Int);
