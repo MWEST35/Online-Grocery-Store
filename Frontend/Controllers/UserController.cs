@@ -176,7 +176,7 @@ namespace Frontend.Controllers
                 }
                 catch (SqlException exception)
                 {
-                    throw new Exception(exception.Message);
+                   throw new Exception(exception.Message);
                 }
             }
             return true;

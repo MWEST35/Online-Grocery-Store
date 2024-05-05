@@ -364,6 +364,7 @@
 
 .button-smaller {
     font-family: Calibri;
+    color: black;
     font-size: 20px;
     background-color: #bfd8af;
     border-color: #99bc85;
@@ -371,6 +372,10 @@
     border-width: 2px;
     border-radius: 2px;
     margin-top: 5px;
+    text-decoration: none; /* Remove underline */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    display: inline-block; /* Ensure button is displayed as a block element */
+    padding: 5px 10px; /* Add padding to improve button appearance */
 }
 
     .button-smaller:active {

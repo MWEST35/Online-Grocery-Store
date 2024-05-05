@@ -1,5 +1,6 @@
 ﻿import "../styles.css";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export default function CheckoutForm() {
   const [userId, setUserId] = useState(0);
@@ -415,7 +416,7 @@ export default function CheckoutForm() {
         Subtotal: {subtotal} Tax: {tax} Total: {total}
         <br />
         <button className="button-smaller">Check Out</button> or{" "}
-        <button className="button-smaller">Edit Cart</button>
+        <Link to="/products" className="button-smaller">Edit Cart</Link>
       </div>
     </div>
   );
