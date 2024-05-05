@@ -66,7 +66,8 @@ export class Products extends Component {
                 }],
             categories: ['All', 'Fruit', 'Vegetables', 'Bread', 'Meat'/* array of product filters goes here */],
             cartItems: [/* array of cart items goes here */],
-            selectedCategory: "All"
+            selectedCategory: "All",
+            searchQuery: ""
         };
     }
 
@@ -74,6 +75,11 @@ export class Products extends Component {
         const category = e.target.value;
         this.setState({ selectedCategory: category });
     }
+
+    handleSearch = (e) => {
+        const searchQuery = e.target.value;
+        this.setState({ searchQuery });
+    };
 
 
     handleAddToCart = (product) => {
@@ -92,10 +98,14 @@ export class Products extends Component {
     };
 
     render() {
-        const { products, categories, selectedCategory, cartItems } = this.state;
-        const filteredProducts = selectedCategory === 'All'
-            ? products
-            : products.filter(product => product.category === selectedCategory);
+        const { products, categories, selectedCategory, cartItems, searchQuery } = this.state;
+
+        const filteredProducts = products.filter(product => {
+            return (
+                (selectedCategory === 'All' || product.category === selectedCategory) &&
+                (searchQuery === '' || product.name.toLowerCase().includes(searchQuery.toLowerCase()))
+            );
+        });
 
 
         return (
@@ -107,6 +117,15 @@ export class Products extends Component {
                     className="logo"
                     draggable="false"
                 />
+
+                            <div className="SearchBar">
+                                <input
+                                    type="text"
+                                    placeholder="Search by name..."
+                                    value={searchQuery}
+                                    onChange={this.handleSearch}
+                                />
+                            </div>
 
                             <div className="ProductDisplay">
                                 {filteredProducts.map(product => (

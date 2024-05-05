@@ -129,8 +129,8 @@
     position: absolute;
     justify-self: left;
     height: 120px;
-    top: 150px;
-    left: 10px;
+    top: 200px;
+    left: 20px;
 }
 
 .ProductDisplay {
@@ -378,3 +378,13 @@
         background-color: #99bc85;
         transform: scale(105%);
     }
+
+.SearchBar {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    justify-self: center;
+    top: 150px; /* Adjust the top position as needed */
+    left: 20px; /* Center the search bar horizontally */
+}
