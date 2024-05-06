@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
+using System.Data.SqlClient;
 
 
 namespace Frontend.Controllers
@@ -9,6 +10,7 @@ namespace Frontend.Controllers
     [Route("api/[controller]")]
     public class UserController : ControllerBase
     {
+
         SqlConnection conn =
             new SqlConnection("data source = Kalelius\\SQLEXPRESS; initial catalog = grocery; TrustServerCertificate = True; user id = sa; password = sixpeasinapod");
 
@@ -174,7 +176,7 @@ namespace Frontend.Controllers
                 }
                 catch (SqlException exception)
                 {
-                    throw new Exception(exception.Message);
+                   throw new Exception(exception.Message);
                 }
             }
             return true;
