@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Accessors;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using System.Data.SqlClient;
@@ -14,45 +15,26 @@ namespace Frontend.Controllers
         SqlConnection conn =
             new SqlConnection("data source = Kalelius\\SQLEXPRESS; initial catalog = grocery; TrustServerCertificate = True; user id = sa; password = sixpeasinapod");
 
+        //data source=Kalelius\SQLEXPRESS;initial catalog=grocery;user id=sa;password=sixpeasinapod
+
         [HttpGet("{username}/{password}")]
         public bool Get(string username, string password)
         {
 
-            string query = "select username, password from Users where username = @username and password = @password";
-            using (SqlCommand cmd = new SqlCommand(query))
+            IUserAccessor userAccessor = new UserAccessor();
+
+            string results = userAccessor.validateAccount(username, password, userAccessor.createConnection());
+
+            if (!(string.Equals(results, "")))
             {
-                cmd.Parameters.Add("@username", System.Data.SqlDbType.NVarChar, 50);
-                cmd.Parameters.Add("@password", System.Data.SqlDbType.NVarChar, 50);
-
-                cmd.Parameters["@username"].Value = username;
-                cmd.Parameters["@password"].Value = password;
-                cmd.Connection = conn;
-
-                try
-                {
-                    cmd.Connection.Open();
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                       if (reader.Read())
-                       {
-                           if (reader.GetString(0) == username && reader.GetString(1) == password)
-                           {
-                                return true;
-                           }
-                       }
-                    }
-
-                    cmd.Connection.Close();
-                }
-                catch (SqlException exception)
-                {
-                    throw new Exception(exception.Message);
-                }
+                return true;
             }
 
             return false;
+
+
         }
-        
+
         // GET api/<ValuesController>/5
         [HttpGet("{id}")]
         public List<string> Get(int id)
