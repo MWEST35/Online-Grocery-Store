@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace Engines
 {
-    public class CartEngine
+    public class CartEngine : ICartEngine
     {
 
-        public double calculateItemCost(double salePct, int units, double pricePerUnit)
+        double ICartEngine.calculateItemCost(double salePct, int units, double pricePerUnit)
         {
             double saleApplied = pricePerUnit * (1 - salePct);
             return Math.Round((saleApplied * units), 2);
         }
 
-        public double calculateTotal(List<double> itemCosts)
+        double ICartEngine.calculateTotal(List<double> itemCosts)
         {
             double gross = 0;
             for (int i = 0; i < itemCosts.Count; i++)
@@ -26,7 +26,7 @@ namespace Engines
             return gross;
         }
 
-        public double calculateTotalWithTax(double gross, string state = "")
+        double ICartEngine.calculateTotalWithTax(double gross, string state = "")
         {
             double taxRate = 0;
             // Find the tax rate for the user's state of residence. Defaults to NE

@@ -65,8 +65,9 @@ export class Products extends Component {
                     image: 'https://png.pngtree.com/element_our/png/20181129/vector-illustration-of-fresh-red-apple-with-single-leaf-png_248312.jpg'
                 }],
             categories: ['All', 'Fruit', 'Vegetables', 'Bread', 'Meat'/* array of product filters goes here */],
-            cartItems: [/* array of cart items goes here */],
-            selectedCategory: "All"
+            cartItems: JSON.parse(sessionStorage.getItem('cartItems')) || [],
+            selectedCategory: "All",
+            searchQuery: "",
         };
     }
 
@@ -74,6 +75,11 @@ export class Products extends Component {
         const category = e.target.value;
         this.setState({ selectedCategory: category });
     }
+
+    handleSearch = (e) => {
+        const searchQuery = e.target.value;
+        this.setState({ searchQuery });
+    };
 
 
     handleAddToCart = (product) => {
@@ -85,17 +91,24 @@ export class Products extends Component {
                 item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
             );
             this.setState({ cartItems: updatedCartItems });
+            sessionStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
         } else {
             const newCartItem = { ...product, quantity: 1 };
-            this.setState({ cartItems: [...cartItems, newCartItem] });
+            const updatedCartItems = [...cartItems, newCartItem];
+            this.setState({ cartItems: updatedCartItems });
+            sessionStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
         }
     };
 
     render() {
-        const { products, categories, selectedCategory, cartItems } = this.state;
-        const filteredProducts = selectedCategory === 'All'
-            ? products
-            : products.filter(product => product.category === selectedCategory);
+        const { products, categories, selectedCategory, cartItems, searchQuery } = this.state;
+
+        const filteredProducts = products.filter(product => {
+            return (
+                (selectedCategory === 'All' || product.category === selectedCategory) &&
+                (searchQuery === '' || product.name.toLowerCase().includes(searchQuery.toLowerCase()))
+            );
+        });
 
 
         return (
@@ -107,6 +120,15 @@ export class Products extends Component {
                     className="logo"
                     draggable="false"
                 />
+
+                            <div className="SearchBar">
+                                <input
+                                    type="text"
+                                    placeholder="Search by name..."
+                                    value={searchQuery}
+                                    onChange={this.handleSearch}
+                                />
+                            </div>
 
                             <div className="ProductDisplay">
                                 {filteredProducts.map(product => (

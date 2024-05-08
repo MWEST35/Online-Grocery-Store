@@ -1,4 +1,5 @@
 import CartItem from "./CartItem";
+import { Link } from 'react-router-dom';
 
 /* Allows users to add items to their shopping cart */
 const ShoppingCart = ({ cartItems, handleCheckout }) => {
@@ -8,7 +9,9 @@ const ShoppingCart = ({ cartItems, handleCheckout }) => {
             {cartItems.map(item => (
                 <CartItem key={item.id} item={item} />
             ))}
-            <button onClick={handleCheckout}>Checkout</button>
+            <Link to="/Checkout">
+                <button onClick={handleCheckout}>Checkout</button>
+            </Link>
         </div>
     );
 };
