@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Engines
 {
-    internal interface ICartEngine
+    public interface ICartEngine
     {
         // Allows printing a single item's cost to two decimal places for receipt
         double calculateItemCost(double salePct, int units, double pricePerUnit);
@@ -15,6 +15,6 @@ namespace Engines
         double calculateTotal(List<double> itemCosts);
 
         // Generates the total to two decimal places
-        double totalWithTax(double gross, string state);
+        double calculateTotalWithTax(double gross, string state = "");
     }
 }
