@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 
 namespace Accessors
 {
-    internal interface IUserAccessor
+    public interface IUserAccessor
     {
         SqlConnection createConnection();
-        List<string> validateAccount(string username, string password);
+        string validateAccount(string username, string password, SqlConnection conn);
 
         string retrieveCart(string userId);
         void registerUser(string email, string username, string password);

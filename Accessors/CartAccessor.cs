@@ -65,10 +65,4 @@ namespace Accessors
         }
     }
 
-    internal interface ICartAccessor
-    {
-        List<string> RetrieveItems(string product_id);
-        void AddItem(string cartId, string productId);
-        void RemoveItem(string cartId, string itemId);
-    }
 }
