@@ -16,7 +16,7 @@ namespace Accessors
         SqlConnection IUserAccessor.createConnection()
         {
             SqlConnection conn =
-                new SqlConnection("data source=JACK\\SQLEXPRESS;initial catalog=Project_grocery;Integrated security=SSPI;TrustServerCertificate=true");
+                new SqlConnection("data source = Kalelius\\SQLEXPRESS; initial catalog = grocery; TrustServerCertificate = True; user id = sa; password = sixpeasinapod");
             return conn;
         }
 
@@ -89,22 +89,8 @@ namespace Accessors
 
         string IUserAccessor.retrieveCart(string userId)
         {
-            SqlParameter userParam = new SqlParameter("@Userid", userId);
-            string results = "";
-            using (SqlCommand command = new SqlCommand(
-                "SELECT CartId FROM Account WHERE UserId = @UserId"
-                ))
-            {
-                command.Parameters.Add(userParam);
-                using (SqlDataReader reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        results = reader.GetString(0);
-                    }
-                }
-            }
-            return results;
+            // TODO: implement a retrieve for the persistent cart based on how cart is tracked by the program.
+            return "";
         }
     }
 }

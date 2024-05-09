@@ -1,4 +1,5 @@
 ﻿using Accessors;
+using Managers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
@@ -15,15 +16,15 @@ namespace Frontend.Controllers
         SqlConnection conn =
             new SqlConnection("data source = Kalelius\\SQLEXPRESS; initial catalog = grocery; TrustServerCertificate = True; user id = sa; password = sixpeasinapod");
 
+        IUserManager userManager = new UserManager();
+
         //data source=Kalelius\SQLEXPRESS;initial catalog=grocery;user id=sa;password=sixpeasinapod
 
         [HttpGet("{username}/{password}")]
         public bool Get(string username, string password)
         {
 
-            IUserAccessor userAccessor = new UserAccessor();
-
-            string results = userAccessor.validateAccount(username, password, userAccessor.createConnection());
+            string results = userManager.logInValidation(username, password);
 
             if (!(string.Equals(results, "")))
             {

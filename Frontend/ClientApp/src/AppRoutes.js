@@ -4,6 +4,9 @@ import { Products } from "./components/Products";
 import { Register } from "./components/Register";
 import { Account } from "./components/Account";
 import { Checkout } from "./components/Checkout";
+import Cart from "./components/Cart";
+
+let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
 
 const products = [{
     id: 1,
@@ -56,7 +59,8 @@ const products = [{
     SKU: "KSRUFTT",
     rating: "4",
     image: 'https://png.pngtree.com/element_our/png/20181129/vector-illustration-of-fresh-red-apple-with-single-leaf-png_248312.jpg'
-}];
+    }];
+
 
 const AppRoutes = [
   {
@@ -83,8 +87,11 @@ const AppRoutes = [
   {
     path: "/checkout",
     element: <Checkout />
+    },
+    {
+        path: "/cart",
+        element: <Cart />
     }
 ];
-
 
 export default AppRoutes;
