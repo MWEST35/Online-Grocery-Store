@@ -11,7 +11,7 @@ namespace Managers
     {
         string IUserManager.logInValidation(string username, string password)
         {
-            IUserAccessor userAccessor = new UserAccessor;
+            IUserAccessor userAccessor = new UserAccessor();
             string result = userAccessor.validateAccount(username, password, userAccessor.createConnection());
             return result;
         }

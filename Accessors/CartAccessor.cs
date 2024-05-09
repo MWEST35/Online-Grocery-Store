@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Data.SqlClient;
 
 namespace Accessors
 {
@@ -25,7 +26,7 @@ namespace Accessors
 
                 string query = "SELECT p.productName FROM product p INNER JOIN cart c ON c.cart_id = p.cartId WHERE c.cart_id = @cart_id";
                 SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@product_id", product_id);
+                //cmd.Parameters.AddWithValue("@product_id", product_id);
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
@@ -59,9 +60,29 @@ namespace Accessors
                 string query = "DELETE FROM Cart WHERE cart_id = @cartId AND product_id = @productId";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@cartId", cartId);
-                cmd.Parameters.AddWithValue("@itemId", itemId);
+                //cmd.Parameters.AddWithValue("@itemId", itemId);
                 cmd.ExecuteNonQuery();
             }
+        }
+
+        public System.Data.SqlClient.SqlConnection createConnection()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<string> retrieveItems(string cartId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void addItem(string cartId, string itemId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void removeItem(string cartId, string itemId)
+        {
+            throw new NotImplementedException();
         }
     }
 
