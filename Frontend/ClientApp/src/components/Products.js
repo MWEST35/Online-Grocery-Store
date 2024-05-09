@@ -65,7 +65,7 @@ export class Products extends Component {
                     image: 'https://png.pngtree.com/element_our/png/20181129/vector-illustration-of-fresh-red-apple-with-single-leaf-png_248312.jpg'
                 }],
             categories: ['All', 'Fruit', 'Vegetables', 'Bread', 'Meat'/* array of product filters goes here */],
-            cartItems: JSON.parse(sessionStorage.getItem('cartItems')) || [],
+            cartItems: JSON.parse(localStorage.getItem('cartItems')) || [],
             selectedCategory: "All",
             searchQuery: "",
         };
@@ -91,12 +91,12 @@ export class Products extends Component {
                 item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
             );
             this.setState({ cartItems: updatedCartItems });
-            sessionStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
+            localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
         } else {
             const newCartItem = { ...product, quantity: 1 };
             const updatedCartItems = [...cartItems, newCartItem];
             this.setState({ cartItems: updatedCartItems });
-            sessionStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
+            localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
         }
     };
 
