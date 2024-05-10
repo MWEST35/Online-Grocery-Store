@@ -13,11 +13,11 @@ export default function ProductForm() {
   const [searchQuery, setSearchQuery] = useState("");
 
   const initPage = (DBproducts) => {
-    let productId = 0;
     let updatedProducts = [];
     for (const product of DBproducts) {
+      console.log(product);
       const newProduct = {
-        id: productId++,
+        id: parseInt(product[9]),
         name: product[0],
         price: product[5],
         category: product[2],
