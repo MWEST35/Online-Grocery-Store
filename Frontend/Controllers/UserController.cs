@@ -21,17 +21,12 @@ namespace Frontend.Controllers
         //data source=Kalelius\SQLEXPRESS;initial catalog=grocery;user id=sa;password=sixpeasinapod
 
         [HttpGet("{username}/{password}")]
-        public bool Get(string username, string password)
+        public Int32 Get(string username, string password)
         {
 
-            string results = userManager.logInValidation(username, password);
+            Int32 result = userManager.logInValidation(username, password);
 
-            if (!(string.Equals(results, "")))
-            {
-                return true;
-            }
-
-            return false;
+            return result;
 
 
         }
@@ -76,7 +71,7 @@ namespace Frontend.Controllers
                 }
             }
 
-            query = "select name, phoneNumber from Customers where user_id = @id";
+            query = "select name, phoneNumber from Users where user_id = @id";
             using (SqlCommand cmd = new SqlCommand(query))
             {
                 cmd.Parameters.Add("@id", System.Data.SqlDbType.Int);
@@ -120,22 +115,6 @@ namespace Frontend.Controllers
 
         }
 
-        [HttpPut("{id}/{username}/{email}/{password}")]
-        public bool Put(int id, string username, string password)
-        {
-
-            string results = userManager.logInValidation(username, password);
-
-            if (!(string.Equals(results, "")))
-            {
-                return true;
-            }
-
-            return false;
-
-
-        }
-
         // PUT api/<ValuesController>/5
         [HttpPut("{id}/{username}/{email}/{password}")]
         public void Put(int id, string username, string email, string password)
@@ -169,10 +148,11 @@ namespace Frontend.Controllers
             return;
         }
 
+        
         [HttpPut("{id}/{name}/{phone}")]
         public void Put(int id, string name, string phone)
         {
-            string query = "update Customers set name = @name, phoneNumber = @phone where user_id = @id";
+            string query = "update Users set name = @name, phoneNumber = @phone where user_id = @id";
             using (SqlCommand cmd = new SqlCommand(query))
             {
                 cmd.Parameters.Add("@name", System.Data.SqlDbType.NVarChar, 50);
@@ -198,12 +178,5 @@ namespace Frontend.Controllers
 
             return;
         }
-
-        /**
-        // DELETE api/<ValuesController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }*/
     }
 }

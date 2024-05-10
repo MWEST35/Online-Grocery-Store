@@ -2,7 +2,6 @@
 import { useState, useEffect } from "react";
 
 export default function AccountForm() {
-  const [userId, setUserId] = useState(0);
 
   const [editAccount, setEditAccount] = useState({
     username: false,
@@ -57,7 +56,7 @@ export default function AccountForm() {
       email: false,
       password: false,
     });
-    fetch(`http://localhost:44478/api/user/${userId}/${username}/${email}/${password}`, {
+    fetch(`http://localhost:44478/api/user/${sessionStorage.getItem('userId')}/${username}/${email}/${password}`, {
       method: 'PUT',
     })
       .then(response => response.json())
@@ -114,7 +113,7 @@ export default function AccountForm() {
       name: false,
       phone: false,
     });
-    fetch(`http://localhost:44478/api/user/${userId}/${name}/${phone}`, {
+    fetch(`http://localhost:44478/api/user/${sessionStorage.getItem('userId') }/${name}/${phone}`, {
       method: 'PUT',
     })
       .then(response => response.json())
@@ -207,7 +206,7 @@ export default function AccountForm() {
       cvv: false,
       date: false,
     });
-    fetch(`http://localhost:44478/api/card/${userId}/${card.name}/${card.num}/${card.cvv}/${card.date}`, {
+    fetch(`http://localhost:44478/api/card/${sessionStorage.getItem('userId') }/${card.name}/${card.num}/${card.cvv}/${card.date}`, {
       method: 'PUT',
     })
       .then(response => response.json())
@@ -300,7 +299,7 @@ export default function AccountForm() {
       city: false,
       zip: false,
     });
-    fetch(`http://localhost:44478/api/shipping/${userId}/${shipping.address}/${shipping.state}/${shipping.city}/${shipping.zip}`, {
+    fetch(`http://localhost:44478/api/shipping/${sessionStorage.getItem('userId') }/${shipping.address}/${shipping.state}/${shipping.city}/${shipping.zip}`, {
       method: 'PUT',
     })
       .then(response => response.json())
@@ -325,27 +324,25 @@ export default function AccountForm() {
   }
 
   useEffect(() => {
-    //need to figure out how to store userId for the session
-    setUserId(1);
-    fetch(`http://localhost:44478/api/user/${userId}`, {
+    fetch(`http://localhost:44478/api/user/${sessionStorage.getItem('userId') }`, {
       method: 'GET',
     })
       .then(response => response.json())
       .then(result => initAccountPersonal(result))
       .catch(error => console.log("Error: ", error));
-    fetch(`http://localhost:44478/api/shipping/${userId}`, {
+    fetch(`http://localhost:44478/api/shipping/${sessionStorage.getItem('userId') }`, {
       method: 'GET',
     })
       .then(response => response.json())
       .then(result => initShipping(result))
       .catch(error => console.log("Error: ", error));
-    fetch(`http://localhost:44478/api/card/${userId}`, {
+    fetch(`http://localhost:44478/api/card/${sessionStorage.getItem('userId') }`, {
       method: 'GET',
     })
       .then(response => response.json())
       .then(result => initCard(result))
       .catch(error => console.log("Error: ", error));
-  }, [userId]);
+  }, []);
 
   return (
     <div className="Account">

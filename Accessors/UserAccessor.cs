@@ -14,10 +14,10 @@ namespace Accessors
     public class UserAccessor : IUserAccessor
     {
 
-        string IUserAccessor.validateAccount(string username, string password, SqlConnection conn)
+        Int32 IUserAccessor.validateAccount(string username, string password, SqlConnection conn)
         {
-            string results = "";
-            string query = "select username, password from Users where username = @username and password = @password";
+            Int32 result = 0;
+            string query = "select user_id from Users where username = @username and password = @password";
             using (SqlCommand cmd = new SqlCommand(query))
             {
 
@@ -36,8 +36,7 @@ namespace Accessors
                     {
                         if (reader.Read())
                         {
-                            string line = reader.GetString(0);
-                            results = line;
+                            result = reader.GetInt32(0);
                         }
                     }
 
@@ -49,7 +48,7 @@ namespace Accessors
                 }
             }
 
-            return results;
+            return result;
         }
 
         bool IUserAccessor.registerUser(string email, string username, string password, SqlConnection conn)

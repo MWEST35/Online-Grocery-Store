@@ -31,7 +31,7 @@ namespace Accessors
                             name = reader.GetString(0);
                             cardNumber = reader.GetString(1);
                             cvv = reader.GetInt32(2).ToString();
-                            date = reader.GetDateTime(3).ToString();
+                            date = reader.GetString(3);
                         }
                     }
                     cmd.Connection.Close();
@@ -50,14 +50,14 @@ namespace Accessors
 
         void ICardAccessor.UpdateCardInfo(int userId, string name, string num, string cvv, string date_month, string date_year, SqlConnection conn)
         {
-            string query = "update Card set name = @name, cardNumber = @num, cvv = @cvv, expDate = @date where card_id = @userId";
+            string query = "update Card set name = @name, cardNumber = @num, cvv = @cvv, expDate = @date where user_id = @userId";
             using (SqlCommand cmd = new SqlCommand(query))
             {
                 cmd.Parameters.Add("@name", System.Data.SqlDbType.NVarChar, 50);
                 cmd.Parameters.Add("@num", System.Data.SqlDbType.NVarChar, 19);
                 cmd.Parameters.Add("@cvv", System.Data.SqlDbType.NVarChar, 3);
                 cmd.Parameters.Add("@date", System.Data.SqlDbType.NVarChar, 5);
-                cmd.Parameters.Add("@id", System.Data.SqlDbType.Int);
+                cmd.Parameters.Add("@userId", System.Data.SqlDbType.Int);
 
                 cmd.Parameters["@name"].Value = name;
                 cmd.Parameters["@num"].Value = num;

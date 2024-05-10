@@ -7,7 +7,7 @@ namespace Managers
     public class ShippingManager : IShippingManager
     {
         private IShippingAccessor shippingAccessor = new ShippingAccessor();
-        IConnectionAccessor connectionAccessor = new IConnectionAccessor();
+        IConnectionAccessor connectionAccessor = new ConnectionAccessor();
         List<string> IShippingManager.RetrieveAddress(int userId)
         {
             return shippingAccessor.RetrieveAddress(userId, connectionAccessor.createConnection());

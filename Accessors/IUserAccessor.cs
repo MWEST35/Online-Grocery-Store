@@ -9,7 +9,7 @@ namespace Accessors
 {
     public interface IUserAccessor
     {
-        string validateAccount(string username, string password, SqlConnection conn);
+        Int32 validateAccount(string username, string password, SqlConnection conn);
 
         string retrieveCart(string userId);
         bool registerUser(string email, string username, string password, SqlConnection conn);

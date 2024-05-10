@@ -8,7 +8,7 @@ namespace Managers
 {
     public interface IUserManager
     {
-        string logInValidation(string username, string password);
+        Int32 logInValidation(string username, string password);
 
         bool registerNewUser(string email, string username, string password);
     }

@@ -151,12 +151,14 @@
     <Compile Include="Class1.cs" />
     <Compile Include="ConnectionAccessor.cs" />
     <Compile Include="IConnectionAccessor.cs" />
+    <Compile Include="IShippingAccessor.cs" />
     <Compile Include="ProductAccessor.cs" />
     <Compile Include="ICardAccessor.cs" />
     <Compile Include="ICartAccessor.cs" />
     <Compile Include="IProductAccessor.cs" />
     <Compile Include="IUserAccessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShippingAccessor.cs" />
     <Compile Include="UserAccessor.cs" />
   </ItemGroup>
   <ItemGroup>

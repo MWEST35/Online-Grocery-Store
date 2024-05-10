@@ -11,10 +11,10 @@ namespace Managers
     {
         IUserAccessor userAccessor = new UserAccessor();
         IConnectionAccessor connectionAccessor = new ConnectionAccessor();
-        string IUserManager.logInValidation(string username, string password)
+        Int32 IUserManager.logInValidation(string username, string password)
         {
 
-            string result = userAccessor.validateAccount(username, password, connectionAccessor.createConnection());
+            Int32 result = userAccessor.validateAccount(username, password, connectionAccessor.createConnection());
             return result;
         }
 

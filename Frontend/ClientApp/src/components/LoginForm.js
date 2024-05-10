@@ -14,8 +14,10 @@ export default function LoginForm() {
     setPassword(e.target.value);
   };
 
-  const login = (isValid) => {
-    if (isValid) {
+  const login = (userId) => {
+    if (userId !== 0) {
+      sessionStorage.setItem('userId', userId.toString());
+      console.log(sessionStorage.getItem('userId'));
       navigate('/products');
     }
   }

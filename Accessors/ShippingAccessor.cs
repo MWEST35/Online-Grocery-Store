@@ -55,7 +55,7 @@ namespace Accessors
             return shippingAddress;
         }
 
-        void IShippingAccessor.updateAddress(int userId, string address, string state, string city, string zip, SqlConnection conn)
+        void IShippingAccessor.UpdateAddress(int userId, string address, string state, string city, string zip, SqlConnection conn)
         {
             string query = "update ShippingAddress set address = @address, state = @state, city = @city, zip = @zip where user_id = @userId";
             using (SqlCommand cmd = new SqlCommand(query))
@@ -64,7 +64,7 @@ namespace Accessors
                 cmd.Parameters.Add("@state", System.Data.SqlDbType.NVarChar, 50);
                 cmd.Parameters.Add("@city", System.Data.SqlDbType.NVarChar, 50);
                 cmd.Parameters.Add("@zip", System.Data.SqlDbType.NVarChar, 10);
-                cmd.Parameters.Add("@id", System.Data.SqlDbType.Int);
+                cmd.Parameters.Add("@userId", System.Data.SqlDbType.Int);
 
                 cmd.Parameters["@address"].Value = address;
                 cmd.Parameters["@state"].Value = state;
