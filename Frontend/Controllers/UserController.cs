@@ -110,7 +110,7 @@ namespace Frontend.Controllers
             account_personal.Add(phone);
             return account_personal;
         }
-        
+
         [HttpPost]
         public bool Post(User user)
         {
@@ -120,7 +120,22 @@ namespace Frontend.Controllers
 
         }
 
-        
+        [HttpPut("{id}/{username}/{email}/{password}")]
+        public bool Put(int id, string username, string password)
+        {
+
+            string results = userManager.logInValidation(username, password);
+
+            if (!(string.Equals(results, "")))
+            {
+                return true;
+            }
+
+            return false;
+
+
+        }
+
         // PUT api/<ValuesController>/5
         [HttpPut("{id}/{username}/{email}/{password}")]
         public void Put(int id, string username, string email, string password)
