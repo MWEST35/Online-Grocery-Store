@@ -24,7 +24,7 @@ namespace Frontend.Controllers
         [HttpPut("{id}/{address}/{state}/{city}/{zip}")]
         public void Put(int id, string address, string state, string city, string zip)
         {
-            cardManager.UpdateAddress(id, address, state, city, zip);
+            shippingManager.UpdateAddress(id, address, state, city, zip);
             return;
         }
     }
