@@ -18,7 +18,7 @@ namespace Frontend.Controllers
 		public List<List<String>> Get()
 		{
 			List<List<String>> products = new List<List<String>>();
-			string query = "select productName, rating, category, dimensions, weight, price, description, manufacturer, sku from Product";
+			string query = "select productName, rating, category, dimensions, weight, price, description, manufacturer, sku, product_id from Product where cart_id is null";
 			using (SqlCommand cmd = new SqlCommand(query))
 			{
 				cmd.Connection = conn;
@@ -49,6 +49,8 @@ namespace Frontend.Controllers
 							product.Add(manufacturer);
                             string sku = reader.GetInt32(8).ToString();
 							product.Add(sku);
+                            string productId = reader.GetInt32(9).ToString();
+							product.Add(productId);
 							products.Add(product);
                         }
 					}
