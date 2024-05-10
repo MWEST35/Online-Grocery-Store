@@ -16,7 +16,7 @@ namespace Accessors
         SqlConnection IUserAccessor.createConnection()
         {
             SqlConnection conn =
-                new SqlConnection("data source = Kalelius\\SQLEXPRESS; initial catalog = grocery; TrustServerCertificate = True; user id = sa; password = sixpeasinapod");
+                new SqlConnection("data source = JACK\\SQLEXPRESS; initial catalog = grocery; TrustServerCertificate = True; Trusted_Connection=True");
             return conn;
         }
 
@@ -83,7 +83,7 @@ namespace Accessors
                     }
                     cmd.Connection.Close();
 
-                    string entry_query = "insert into Users (username, email, password) values (@username, @email, @password)";
+                    string entry_query = "insert into Users (username, email, password, phoneNumber, name) values (@username, @email, @password, '', '')";
                     using (SqlCommand update_cmd = new SqlCommand(entry_query))
                     {
                         update_cmd.Parameters.Add("@username", System.Data.SqlDbType.NVarChar, 50);
