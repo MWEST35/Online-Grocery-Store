@@ -58,33 +58,54 @@ namespace Accessors
             return results;
         }
 
-        void IUserAccessor.registerUser(string email, string username, string password)
+        bool IUserAccessor.registerUser(string email, string username, string password, SqlConnection conn)
         {
-            IUserAccessor userAccessor = new UserAccessor();
-            string results;
-            results = userAccessor.validateAccount(username, password, userAccessor.createConnection());
-            if (!(string.Equals(results, "")))
+            string query = "select username from Users where username = @username or email = @email";
+            using (SqlCommand cmd = new SqlCommand(query))
             {
-                // No account with this username and password exists
-                SqlParameter userParam = new SqlParameter("@Username", username);
-                SqlParameter passParam = new SqlParameter("@Password", password);
-                SqlParameter emailParam = new SqlParameter("@Email", email);
-                using (SqlCommand command = new SqlCommand(
-                    "insert into Users (username, password, email) values ('@Username', '@Password', '@email');"
-                    ))
+                cmd.Parameters.Add("@username", System.Data.SqlDbType.NVarChar, 50);
+                cmd.Parameters.Add("@email", System.Data.SqlDbType.NVarChar, 100);
+
+                cmd.Parameters["@username"].Value = username;
+                cmd.Parameters["@email"].Value = email;
+                cmd.Connection = conn;
+
+                try
                 {
-                    command.Parameters.Add(userParam);
-                    command.Parameters.Add(passParam);
-                    using (SqlDataReader reader = command.ExecuteReader())
+                    cmd.Connection.Open();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        while (reader.Read())
+                        if (reader.Read())
                         {
-                            string line = reader.GetString(0);
-                            results = line;
+                            cmd.Connection.Close();
+                            return false;
                         }
                     }
+                    cmd.Connection.Close();
+
+                    string entry_query = "insert into Users (username, email, password) values (@username, @email, @password)";
+                    using (SqlCommand update_cmd = new SqlCommand(entry_query))
+                    {
+                        update_cmd.Parameters.Add("@username", System.Data.SqlDbType.NVarChar, 50);
+                        update_cmd.Parameters.Add("@email", System.Data.SqlDbType.NVarChar, 100);
+                        update_cmd.Parameters.Add("@password", System.Data.SqlDbType.NVarChar, 50);
+
+                        update_cmd.Parameters["@username"].Value = username;
+                        update_cmd.Parameters["@email"].Value = email;
+                        update_cmd.Parameters["@password"].Value = password;
+                        update_cmd.Connection = conn;
+
+                        update_cmd.Connection.Open();
+                        update_cmd.ExecuteNonQuery();
+                        update_cmd.Connection.Close();
+                    }
+                }
+                catch (SqlException exception)
+                {
+                    throw new Exception(exception.Message);
                 }
             }
+            return true;
         }
 
         string IUserAccessor.retrieveCart(string userId)
