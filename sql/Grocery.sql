@@ -47,17 +47,18 @@ CREATE TABLE Card (
     Name VARCHAR(50),
     cardNumber VARCHAR(16) PRIMARY KEY,
     cvv INT,
-    expDate DATE,
+    expDate VARCHAR(5),
     user_id INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
 
 );
 
-insert into Card (Name, cardNumber, cvv, expDate, user_id) values ('Spongebob Jr', '1234567890123456', 123, '2026-12-31', 1),
-  ('amazing spiderman', '1234567890123457', 123, '2026-12-31', 2),
-  ('kevinhart Comedian', '1234567890123458', 123, '2026-12-31', 3),
-  ('ironman Robert', '1234567890123459', 123, '2026-12-31', 4),
-  ('gunslinger gamer', '1234567890123460', 123, '2026-12-31', 5);
+insert into Card (Name, cardNumber, cvv, expDate, user_id) values 
+  ('Spongebob Jr', '1234567890123456', 123, '2026-12-31', 1),
+  ('amazing spiderman', '1234567890123457', 123, '12/25', 2),
+  ('kevinhart Comedian', '1234567890123458', 123, '12/25', 3),
+  ('ironman Robert', '1234567890123459', 123, '12/28', 4),
+  ('gunslinger gamer', '1234567890123460', 123, '12/29', 5);
 
 --select * from Card;
 
