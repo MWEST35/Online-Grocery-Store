@@ -16,7 +16,7 @@ namespace Accessors
         SqlConnection IUserAccessor.createConnection()
         {
             SqlConnection conn =
-                new SqlConnection("data source=JACK\\SQLEXPRESS;initial catalog=Project_grocery;Integrated security=SSPI;TrustServerCertificate=true");
+                new SqlConnection("data source = Kalelius\\SQLEXPRESS; initial catalog = grocery; TrustServerCertificate = True; user id = sa; password = sixpeasinapod");
             return conn;
         }
 
