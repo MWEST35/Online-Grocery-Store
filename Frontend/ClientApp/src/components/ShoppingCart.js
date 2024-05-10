@@ -12,10 +12,10 @@ const ShoppingCart = ({ cartItems, handleCheckout }) => {
                 <CartItem key={item.id} item={item} />
             ))}
             <Link to="/Checkout">
-                <button style={{ marginTop: '15px', marginLeft: '40px' }}  onClick={handleCheckout}>Checkout</button>
+                <button style={{ marginTop: '15px', marginLeft: '40px' }} onClick={handleCheckout} className="checkout-button">Checkout</button>
             </Link>
             <Link to="/Cart">
-                <button style={{ marginLeft: '10px' }}> View Cart</button>
+                <button style={{ marginLeft: '10px' }} className="view-cart-button"> View Cart</button>
             </Link>
         </div>
     );
