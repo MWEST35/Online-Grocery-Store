@@ -12,35 +12,15 @@ namespace Frontend.Controllers
 	{
 
 		SqlConnection conn =
-	new SqlConnection("data source = Kalelius\\SQLEXPRESS; initial catalog = grocery; TrustServerCertificate = True; user id = sa; password = sixpeasinapod");
+	        new SqlConnection("data source = Kalelius\\SQLEXPRESS; initial catalog = grocery; TrustServerCertificate = True; user id = sa; password = sixpeasinapod");
 
-		[HttpGet("{productName}/{rating}/{category}/{dimensions}/{weight}/{price}/{description}/{manufacturer}/{sku}")]
-		public bool Get(string productName, int rating, string category, string dimensions, double weight, double price, string description, string manufacturer, int sku)
+        [HttpGet]
+		public List<List<String>> Get()
 		{
-
-			string query = "select productName, rating, category, dimensions, weight, price, description, manufacturer, sku " +
-				"from product where productName = @productName and rating = @ratinf and category = @category and dimensions = @dimensions" +
-				" and weight = @weight and price = @price and description = @description and manufacturer = @manufacturer and sku = @sku;";
+			List<List<String>> products = new List<List<String>>();
+			string query = "select productName, rating, category, dimensions, weight, price, description, manufacturer, sku from Product";
 			using (SqlCommand cmd = new SqlCommand(query))
 			{
-				cmd.Parameters.Add("@productName", System.Data.SqlDbType.NVarChar, 50);
-				cmd.Parameters.Add("@rating", System.Data.SqlDbType.Int);
-				cmd.Parameters.Add("@category", System.Data.SqlDbType.NVarChar, 50);
-				cmd.Parameters.Add("@dimensions", System.Data.SqlDbType.VarChar, 50);
-				cmd.Parameters.Add("@weight", System.Data.SqlDbType.Decimal);
-				cmd.Parameters.Add("@price", System.Data.SqlDbType.Decimal);
-				cmd.Parameters.Add("@description", System.Data.SqlDbType.Text);
-				cmd.Parameters.Add("@sku", System.Data.SqlDbType.Int);
-
-
-				cmd.Parameters["@productName"].Value = productName;
-				cmd.Parameters["@rating"].Value = rating;
-				cmd.Parameters["@category"].Value = category;
-				cmd.Parameters["@dimensions"].Value = dimensions;
-				cmd.Parameters["@weight"].Value = weight;
-				cmd.Parameters["@price"].Value = price;
-				cmd.Parameters["@description"].Value = description;
-				cmd.Parameters["@sku"].Value = sku;
 				cmd.Connection = conn;
 
 				try
@@ -48,16 +28,29 @@ namespace Frontend.Controllers
 					cmd.Connection.Open();
 					using (SqlDataReader reader = cmd.ExecuteReader())
 					{
-						if (reader.Read())
+						while (reader.Read())
 						{
-							if (reader.GetString(0) == productName && reader.GetInt16(1) == rating
-								 && reader.GetString(2) == category && reader.GetString(3) == dimensions
-								 && reader.GetDecimal(4).Equals(weight) && reader.GetDecimal(5).Equals(price)
-								 && reader.GetString(6) == description && reader.GetInt16(7) == sku)
-							{
-								return true;
-							}
-						}
+							List<String> product = new List<String>();
+							string productName = reader.GetString(0);
+							product.Add(productName);
+                            string rating = reader.GetInt32(1).ToString();
+							product.Add(rating);
+                            string category = reader.GetString(2);
+							product.Add(category);
+                            string dimensions = reader.GetString(3);
+							product.Add(dimensions);
+                            string weight = reader.GetDecimal(4).ToString();
+							product.Add(weight);
+                            string price = reader.GetDecimal(5).ToString();
+							product.Add(price);
+                            string description = reader.GetString(6);
+							product.Add(description);
+                            string manufacturer = reader.GetString(7);
+							product.Add(manufacturer);
+                            string sku = reader.GetInt32(8).ToString();
+							product.Add(sku);
+							products.Add(product);
+                        }
 					}
 
 					cmd.Connection.Close();
@@ -68,7 +61,7 @@ namespace Frontend.Controllers
 				}
 			}
 
-			return false;
+			return products;
 		}
 	}
 }
