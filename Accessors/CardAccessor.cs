@@ -6,17 +6,15 @@ namespace Accessors
 {
     public class CardAccessor : ICardAccessor
     {
-        SqlConnection conn =
-            new SqlConnection("data source = Kalelius\\SQLEXPRESS; initial catalog = grocery; TrustServerCertificate = True; user id = sa; password = sixpeasinapod");
-
-        List<string> ICardAccessor.RetrieveCardInfo(int userId)
+        
+        List<string> ICardAccessor.RetrieveCardInfo(int userId, SqlConnection conn)
         {
             string name = "";
             string cardNumber = "";
             string cvv = "";
             string date = "";
             List<string> card = new List<string>();
-            string query = "select name, cardNumber, cvv, expDate from Card where card_id = @userId";
+            string query = "select name, cardNumber, cvv, expDate from Card where user_id = @userId";
             using (SqlCommand cmd = new SqlCommand(query))
             {
                 cmd.Parameters.Add("@userId", System.Data.SqlDbType.Int);
@@ -32,8 +30,8 @@ namespace Accessors
                         {
                             name = reader.GetString(0);
                             cardNumber = reader.GetString(1);
-                            cvv = reader.GetString(2);
-                            date = reader.GetString(3);
+                            cvv = reader.GetInt32(2).ToString();
+                            date = reader.GetDateTime(3).ToString();
                         }
                     }
                     cmd.Connection.Close();
@@ -50,7 +48,7 @@ namespace Accessors
             return card;
         }
 
-        void ICardAccessor.UpdateCardInfo(int userId, string name, string num, string cvv, string date_month, string date_year)
+        void ICardAccessor.UpdateCardInfo(int userId, string name, string num, string cvv, string date_month, string date_year, SqlConnection conn)
         {
             string query = "update Card set name = @name, cardNumber = @num, cvv = @cvv, expDate = @date where card_id = @userId";
             using (SqlCommand cmd = new SqlCommand(query))
