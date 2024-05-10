@@ -11,8 +11,8 @@ namespace Accessors
 {
     internal class CartAccessor : ICartAccessor
     {
-        SqlConnection conn = new SqlConnection(@"data source=5ada07625c51;initial catalog=Project_grocery;user id=sa;password=Chocolate@12");
-        List<string> ICartAccessor.retrieveItems(string cartId)
+       
+        List<string> ICartAccessor.retrieveItems(string cartId, SqlConnection conn)
         {
             List<string> items = new List<string>();
 
@@ -42,7 +42,7 @@ namespace Accessors
             return items;
         }
 
-        void ICartAccessor.addItem(string cartId, string productId)
+        void ICartAccessor.addItem(string cartId, string productId, SqlConnection conn)
         {
             string query = "INSERT INTO Cart(product_id, quantity) SELECT productId, 1 FROM product WHERE productId = @productId";
             using (SqlCommand cmd = new SqlCommand(query))
@@ -61,7 +61,7 @@ namespace Accessors
             }
         }
 
-        void ICartAccessor.removeItem(string cartId, string productId)
+        void ICartAccessor.removeItem(string cartId, string productId, SqlConnection conn)
         {
             string query = "DELETE FROM Cart WHERE cart_id = @cartId AND product_id = @productId";
             using (SqlCommand cmd = new SqlCommand(query))

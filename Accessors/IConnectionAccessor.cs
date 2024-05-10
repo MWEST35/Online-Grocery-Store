@@ -7,9 +7,8 @@ using Microsoft.Data.SqlClient;
 
 namespace Accessors
 {
-    public interface IProductAccessor
+    public interface IConnectionAccessor
     {
-        List<List<String>> getProducts(SqlConnection conn);
-        
+        SqlConnection createConnection();
     }
 }

@@ -114,9 +114,7 @@ namespace Frontend.Controllers
         [HttpPost]
         public bool Post(User user)
         {
-            SqlConnection conn =
-                new SqlConnection("data source = Kalelius\\SQLEXPRESS; initial catalog = grocery; TrustServerCertificate = True; user id = sa; password = sixpeasinapod");
-
+            
             return userManager.registerNewUser(user.Email, user.Name, user.Password);
 
 

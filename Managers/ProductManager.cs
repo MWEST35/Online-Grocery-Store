@@ -11,9 +11,10 @@ namespace Managers
     public class ProductManager : IProductManager
     {
         IProductAccessor productAccessor = new ProductAccessor();
+        IConnectionAccessor connectionAccessor = new ConnectionAccessor();
         List<List<string>> IProductManager.retrieveProductInformation()
         {
-            return productAccessor.getProducts(productAccessor.createConnection());
+            return productAccessor.getProducts(connectionAccessor.createConnection());
         }
     }
 }

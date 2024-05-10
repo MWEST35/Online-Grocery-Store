@@ -9,7 +9,6 @@ namespace Accessors
 {
     public interface IUserAccessor
     {
-        SqlConnection createConnection();
         string validateAccount(string username, string password, SqlConnection conn);
 
         string retrieveCart(string userId);

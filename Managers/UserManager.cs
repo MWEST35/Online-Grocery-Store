@@ -10,16 +10,17 @@ namespace Managers
     public class UserManager : IUserManager
     {
         IUserAccessor userAccessor = new UserAccessor();
+        IConnectionAccessor connectionAccessor = new ConnectionAccessor();
         string IUserManager.logInValidation(string username, string password)
         {
 
-            string result = userAccessor.validateAccount(username, password, userAccessor.createConnection());
+            string result = userAccessor.validateAccount(username, password, connectionAccessor.createConnection());
             return result;
         }
 
         bool IUserManager.registerNewUser(string email, string username, string password)
         {
-            return userAccessor.registerUser(email, username, password, userAccessor.createConnection());
+            return userAccessor.registerUser(email, username, password, connectionAccessor.createConnection());
 
         }
     }

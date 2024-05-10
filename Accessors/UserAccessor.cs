@@ -13,12 +13,6 @@ namespace Accessors
 {
     public class UserAccessor : IUserAccessor
     {
-        SqlConnection IUserAccessor.createConnection()
-        {
-            SqlConnection conn =
-                new SqlConnection("data source = JACK\\SQLEXPRESS; initial catalog = grocery; TrustServerCertificate = True; Trusted_Connection=True");
-            return conn;
-        }
 
         string IUserAccessor.validateAccount(string username, string password, SqlConnection conn)
         {

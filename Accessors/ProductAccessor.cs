@@ -9,12 +9,6 @@ namespace Accessors
 {
     public class ProductAccessor : IProductAccessor
     {
-        SqlConnection IProductAccessor.createConnection()
-        {
-            SqlConnection conn =
-                new SqlConnection("data source = JACK\\SQLEXPRESS; initial catalog = grocery; TrustServerCertificate = True; Trusted_Connection=True");
-            return conn;
-        }
 
         List<List<string>> IProductAccessor.getProducts(SqlConnection conn)
         {

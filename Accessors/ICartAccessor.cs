@@ -9,9 +9,9 @@ namespace Accessors
 {
     internal interface ICartAccessor
     {
-        List<string> retrieveItems(string cartId);
-        void addItem(string cartId, string productId);
-        void removeItem(string cartId, string productId);
+        List<string> retrieveItems(string cartId, SqlConnection conn);
+        void addItem(string cartId, string productId, SqlConnection conn);
+        void removeItem(string cartId, string productId, SqlConnection conn);
 
     }
 }
