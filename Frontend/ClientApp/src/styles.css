@@ -128,10 +128,44 @@
 .ProductFilter {
     position: absolute;
     justify-self: left;
-    height: 120px;
+    height: 80px;
     top: 200px;
     left: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
+    .ProductFilter h2 {
+        margin-bottom: 10px;
+        font-size: 18px;
+        color: #333;
+    }
+
+    .ProductFilter label {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 14px;
+        color: #555;
+    }
+
+    .ProductFilter input[type="checkbox"] {
+        margin-right: 5px;
+    }
+
+    .ProductFilter button {
+        padding: 5px 10px;
+        border: none;
+        border-radius: 3px;
+        background-color: #007bff;
+        color: white;
+        cursor: pointer;
+    }
+
+        .ProductFilter button:hover {
+            background-color: #0056b3;
+        }
 
 .ProductDisplay {
     background-color: #f9f9f9;
@@ -155,9 +189,8 @@
         object-fit: cover; /* Maintain aspect ratio and crop if necessary */
 }
 
-/* Update the ShoppingCart component to style the cart items */
 .ShoppingCart {
-    width: 300px;
+    width: 320px;
     position: absolute;
     top: 10px;
     right: 30px;
@@ -169,6 +202,7 @@
     padding: 20px;
     max-width: 400px; /* Set a maximum width for the shopping cart */
     overflow-y: auto; /* Add vertical scroll if the cart overflows */
+    color: #333; /* Set text color */
 }
 
 /* Update the CartItem component to style each item in the cart */
@@ -188,6 +222,7 @@
     .cart-item p {
         margin: 0;
     }
+
 .cart-item button {
     margin-left: auto;
 }
@@ -393,7 +428,16 @@
     justify-self: center;
     top: 150px; /* Adjust the top position as needed */
     left: 20px; /* Center the search bar horizontally */
+    width: 300px;
 }
+
+.SearchBar input[type="text"] {
+        width: 100%; /* Set the width of the text input to 100% of the search bar */
+        padding: 5px; /* Add padding to the text input */
+        box-sizing: border-box; /* Ensure padding is included in the width */
+        border: none; /* Remove border from the text input */
+        outline: none; /* Remove outline from the text input */
+    }
 
 .CartContainer {
     background-color: #E1F0DA;
@@ -499,4 +543,28 @@
 
 .back-to-products {
     text-align: center;
+}
+
+.checkout-button,
+.view-cart-button {
+    padding: 5px 10px;
+    background-color: #28a745; /* Green color */
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+    .checkout-button:hover,
+    .view-cart-button:hover {
+        background-color: #218838; /* Darker green on hover */
+    }
+
+/* Adjust the margin to space the buttons */
+.checkout-button {
+    margin-right: 5px;
+}
+
+.view-cart-button {
+    margin-left: 5px;
 }
