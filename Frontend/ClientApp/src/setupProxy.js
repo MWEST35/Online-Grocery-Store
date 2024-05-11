@@ -9,6 +9,7 @@ const context = [
   "/api/shipping",
   "/api/card",
   "/api/product",
+  "/api/cart",
 ];
 
 const onError = (err, req, resp, target) => {

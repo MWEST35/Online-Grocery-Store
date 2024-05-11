@@ -107,7 +107,7 @@ namespace Frontend.Controllers
         }
 
         [HttpPost]
-        public bool Post(User user)
+        public Int32 Post(User user)
         {
             
             return userManager.registerNewUser(user.Email, user.Name, user.Password);

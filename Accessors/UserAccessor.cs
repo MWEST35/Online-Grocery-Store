@@ -51,8 +51,10 @@ namespace Accessors
             return result;
         }
 
-        bool IUserAccessor.registerUser(string email, string username, string password, SqlConnection conn)
+        Int32 IUserAccessor.registerUser(string email, string username, string password, SqlConnection conn)
         {
+
+            Int32 userId = 0;
             string query = "select username from Users where username = @username or email = @email";
             using (SqlCommand cmd = new SqlCommand(query))
             {
@@ -71,12 +73,11 @@ namespace Accessors
                         if (reader.Read())
                         {
                             cmd.Connection.Close();
-                            return false;
+                            return userId;
                         }
                     }
                     cmd.Connection.Close();
-
-                    string entry_query = "insert into Users (username, email, password, phoneNumber, name) values (@username, @email, @password, '', '')";
+                    string entry_query = "insert into Users (username, email, password, phoneNumber, name) values (@username, @email, @password, \'\', \'\'); select scope_identity()";
                     using (SqlCommand update_cmd = new SqlCommand(entry_query))
                     {
                         update_cmd.Parameters.Add("@username", System.Data.SqlDbType.NVarChar, 50);
@@ -89,8 +90,41 @@ namespace Accessors
                         update_cmd.Connection = conn;
 
                         update_cmd.Connection.Open();
-                        update_cmd.ExecuteNonQuery();
+                        userId = Convert.ToInt32(update_cmd.ExecuteScalar());
                         update_cmd.Connection.Close();
+                    }
+                    string cart_query = "insert into Cart (user_id) values (@userId);";
+                    using (SqlCommand cart_cmd = new SqlCommand(cart_query))
+                    {
+                        cart_cmd.Parameters.Add("@userId", System.Data.SqlDbType.Int);
+                        cart_cmd.Parameters["@userId"].Value = userId;
+                        cart_cmd.Connection = conn;
+
+                        cart_cmd.Connection.Open();
+                        cart_cmd.ExecuteNonQuery();
+                        cart_cmd.Connection.Close();
+                    }
+                    string shipping_query = "insert into ShippingAddress (address, state, city, zip, user_id) values (\'\', \'\', \'\', \'\', @userId)";
+                    using (SqlCommand shipping_cmd = new SqlCommand(shipping_query))
+                    {
+                        shipping_cmd.Parameters.Add("@userId", System.Data.SqlDbType.Int);
+                        shipping_cmd.Parameters["@userId"].Value = userId;
+                        shipping_cmd.Connection = conn;
+
+                        shipping_cmd.Connection.Open();
+                        shipping_cmd.ExecuteNonQuery();
+                        shipping_cmd.Connection.Close();
+                    }
+                    string card_query = "insert into Card (Name, cardNumber, cvv, expDate, user_id) values (\'\', \'\', 0, \'\', @userId)";
+                    using (SqlCommand card_cmd = new SqlCommand(card_query))
+                    {
+                        card_cmd.Parameters.Add("@userId", System.Data.SqlDbType.Int);
+                        card_cmd.Parameters["@userId"].Value = userId;
+                        card_cmd.Connection = conn;
+
+                        card_cmd.Connection.Open();
+                        card_cmd.ExecuteNonQuery();
+                        card_cmd.Connection.Close();
                     }
                 }
                 catch (SqlException exception)
@@ -98,7 +132,7 @@ namespace Accessors
                     throw new Exception(exception.Message);
                 }
             }
-            return true;
+            return userId;
         }
 
         string IUserAccessor.retrieveCart(string userId)

@@ -7,11 +7,8 @@ namespace Frontend.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class CardController : Controller
+    public class CardController : ControllerBase
     {
-        SqlConnection conn =
-            new SqlConnection("data source = Kalelius\\SQLEXPRESS; initial catalog = grocery; TrustServerCertificate = True; user id = sa; password = sixpeasinapod");
-
         ICardManager cardManager = new CardManager();
 
         [HttpGet("{id}")]

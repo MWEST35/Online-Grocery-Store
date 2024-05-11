@@ -148,7 +148,6 @@
   <ItemGroup>
     <Compile Include="CardAccessor.cs" />
     <Compile Include="CartAccessor.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="ConnectionAccessor.cs" />
     <Compile Include="IConnectionAccessor.cs" />
     <Compile Include="IShippingAccessor.cs" />

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
+import Logout from './Logout';
 
 function ProductView() {
     const products = JSON.parse(localStorage.getItem('products')) || [];
@@ -18,6 +19,7 @@ function ProductView() {
                 className="logo"
                 draggable="false"
             />
+            <Logout />
 
         <div className="ProductDetails">
             <h2>{product.name}</h2>

@@ -14,13 +14,24 @@ export default function LoginForm() {
     setPassword(e.target.value);
   };
 
+  const setCartId = (cartId) => {
+    if (cartId !== 0) {
+      sessionStorage.setItem('cartId', cartId.toString());
+    }
+  };
+
   const login = (userId) => {
     if (userId !== 0) {
       sessionStorage.setItem('userId', userId.toString());
-      console.log(sessionStorage.getItem('userId'));
+      fetch(`http://localhost:44478/api/cart/${userId}`, {
+        method: "GET"
+      })
+        .then(response => response.json())
+        .then(result => setCartId(result))
+        .catch(error => console.log("Error: ", error));
       navigate('/products');
     }
-  }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();

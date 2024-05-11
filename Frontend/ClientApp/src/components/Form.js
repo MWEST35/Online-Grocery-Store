@@ -27,17 +27,30 @@ export default function Form() {
   const handlePassword = (e) => {
     setPassword(e.target.value);
     setSubmitted(false);
-    };
+  };
 
-    const register = (isValid) => {
-        if (isValid) {
-            setSubmitted(true);
-            setError(false);
-            setExistsError(false);
-            navigate('/products');
-        } else {
-            setExistsError(true);
-        }
+  const setCartId = (cartId) => {
+    if (cartId !== 0) {
+      sessionStorage.setItem('cartId', cartId.toString());
+    }
+  };
+
+    const register = (userId) => {
+      if (userId !== 0) {
+        sessionStorage.setItem('userId', userId.toString());
+        fetch(`http://localhost:44478/api/cart/${userId}`, {
+          method: "GET"
+        })
+          .then(response => response.json())
+          .then(result => setCartId(result))
+          .catch(error => console.log("Error: ", error));
+        setSubmitted(true);
+        setError(false);
+        setExistsError(false);
+        navigate('/products');
+       } else {
+         setExistsError(true);
+       }
     };
 
 

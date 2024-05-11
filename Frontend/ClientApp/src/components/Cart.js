@@ -3,15 +3,52 @@ import { Link } from 'react-router-dom';
 
 
 const Cart = () => {
-    let [cartItems, setCartItems] = useState([]);
+  let [cartItems, setCartItems] = useState([]);
+  let [totalPrice, setTotalPrice] = useState(0)
 
-    useEffect(() => {
-        const storedCartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-        setCartItems(storedCartItems);
-    }, []);
+  const initCart = (DBcart) => {
+    let updatedCartItems = [];
+    for (const product of DBcart) {
+      const newProduct = {
+        id: parseInt(product[9]),
+        name: product[0],
+        price: parseFloat(product[5]),
+        category: product[2],
+        manufacturer: product[7],
+        description: product[6],
+        dimensions: product[3],
+        weight: product[4],
+        SKU: product[8],
+        rating: product[1],
+        image: product[10]
+      };
+      updatedCartItems = [...updatedCartItems, newProduct];
+    }
+    setCartItems(updatedCartItems);
+    localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
+  }
 
-    const handleRemoveItem = (itemId) => {
-        const updatedCartItems = cartItems.map(item =>
+  useEffect(() => {
+    fetch(`http://localhost:44478/api/product/${sessionStorage.getItem('cartId')}`, {
+      method: 'GET',
+    })
+      .then(response => response.json())
+      .then(result => initCart(result))
+      .catch(error => console.log("Error: ", error));
+    const total = cartItems.reduce((total, item) => total + (item.price), 0);
+    setTotalPrice(total);
+  }, [cartItems]);
+
+
+
+  const handleRemoveItem = (itemId) => {
+    fetch(`http://localhost:44478/api/product/${itemId}/${sessionStorage.getItem('cartId')}/${false}`, {
+      method: 'PUT',
+    })
+      .then(response => response.json())
+      .then(result => console.log("result"))
+      .catch(error => console.log("Error: ", error));
+        /**const updatedCartItems = cartItems.map(item =>
             item.id === itemId
                 ? { ...item, quantity: item.quantity - 1 }
                 : item
@@ -20,12 +57,10 @@ const Cart = () => {
         cartItems = updatedCartItems;
         localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
         // Force component re-render to reflect the updated cartItems
-        window.location.reload();
+        window.location.reload();*/
     };
 
-    console.log("Cart Items:", cartItems)
-
-    const totalPrice = cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+    
 
     return (
         <div className="CartContainer">
@@ -44,7 +79,6 @@ const Cart = () => {
                             <div className="cart-item-name">{item.name}</div>
                             <div className="cart-item-price">${item.price}</div>
                         </div>
-                        <div className="cart-item-quantity"> Quantity: {item.quantity}</div>
                         <div className="cart-item-buttons">
                             <button onClick={() => handleRemoveItem(item.id)}>Remove</button>
                         </div>

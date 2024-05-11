@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Engines", "Engines\Engines.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Accessors", "Accessors\Accessors.csproj", "{F06262CC-8105-40C5-BC9E-07A99796C69B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{DAFFEB7B-7D69-463C-BABC-A7F587009F00}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EngineTests", "EngineTests\EngineTests.csproj", "{7B379CED-D5BD-4F10-81E9-9F5AC7B06052}"
 EndProject
 Global
@@ -37,10 +35,6 @@ Global
 		{F06262CC-8105-40C5-BC9E-07A99796C69B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F06262CC-8105-40C5-BC9E-07A99796C69B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F06262CC-8105-40C5-BC9E-07A99796C69B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DAFFEB7B-7D69-463C-BABC-A7F587009F00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DAFFEB7B-7D69-463C-BABC-A7F587009F00}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DAFFEB7B-7D69-463C-BABC-A7F587009F00}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DAFFEB7B-7D69-463C-BABC-A7F587009F00}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7B379CED-D5BD-4F10-81E9-9F5AC7B06052}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7B379CED-D5BD-4F10-81E9-9F5AC7B06052}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B379CED-D5BD-4F10-81E9-9F5AC7B06052}.Release|Any CPU.ActiveCfg = Release|Any CPU

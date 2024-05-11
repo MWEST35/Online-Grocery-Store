@@ -12,6 +12,6 @@ namespace Accessors
         Int32 validateAccount(string username, string password, SqlConnection conn);
 
         string retrieveCart(string userId);
-        bool registerUser(string email, string username, string password, SqlConnection conn);
+        Int32 registerUser(string email, string username, string password, SqlConnection conn);
     }
 }
