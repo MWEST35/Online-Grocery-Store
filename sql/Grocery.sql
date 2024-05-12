@@ -32,7 +32,6 @@ CREATE TABLE ShippingAddress (
   zip VARCHAR(10),
   user_id INT NOT NULL,
   FOREIGN KEY (user_id) REFERENCES Users(user_id)
-
 );
 
 insert into ShippingAddress (address, state, city, zip, user_id) values 
@@ -52,10 +51,10 @@ CREATE TABLE Card (
     expDate VARCHAR(5),
     user_id INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
-
 );
 
-insert into Card (Name, cardNumber, cvv, expDate, user_id) values ('Spongebob Jr', '1234567890123456', 123, '12/26', 1),
+insert into Card (Name, cardNumber, cvv, expDate, user_id) values 
+  ('Spongebob Jr', '1234567890123456', 123, '12/26', 1),
   ('amazing spiderman', '1234567890123457', 123, '8/34', 2),
   ('kevinhart Comedian', '1234567890123458', 123, '10/28', 3),
   ('ironman Robert', '1234567890123459', 123, '10/30', 4),
@@ -88,11 +87,11 @@ CREATE TABLE Product (
     description TEXT,
     manufacturer VARCHAR(50),
     sku INT NOT NULL,
-	imgUrl TEXT,
+	  imgUrl TEXT,
     cart_id INT,
     FOREIGN KEY (cart_id) REFERENCES cart(cart_id)
-
 );
+
 --Fruit (sku: 1#######)
 insert into Product (productName, rating, category, dimensions, weight, price, description, manufacturer, sku, imgUrl) values 
   ('Fresh Gala Apples', 3, 'Fruit', '3 x 2 x 4', 3.0, 3.86, '3 lb bag of Fresh Organic Apples', 'Freshness Guaranteed', 10000000, 'https://i5.walmartimages.com/seo/Fresh-Gala-Apples-3-lb-Bag_eebbaadc-2ca6-4e25-a2c0-c189d4871fea.bcbe9a9c422a1443b7037548bb2c54c3.jpeg?odnHeight=640&odnWidth=640&odnBg=FFFFFF'),
