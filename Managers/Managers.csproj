@@ -163,6 +163,10 @@
       <Project>{f06262cc-8105-40c5-bc9e-07a99796c69b}</Project>
       <Name>Accessors</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Engines\Engines.csproj">
+      <Project>{F95097DB-86F6-4D27-9697-5081C5CFEC7A}</Project>
+      <Name>Engines</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

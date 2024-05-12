@@ -11,10 +11,10 @@ export default function CheckoutForm() {
     date: false,
   });
   const [card, setCard] = useState({
-    name: "Cardholder Name",
-    num: "1223 123123 12321",
-    date: "12/12",
-    cvv: "100",
+    name: "",
+    num: "",
+    date: "",
+    cvv: "",
   });
   const [cardChanged, setCardChanged] = useState(false);
 
@@ -104,9 +104,9 @@ export default function CheckoutForm() {
     zip: false,
   });
   const [shipping, setShipping] = useState({
-    address: "1021 N 16th Street",
-    state: "Nebraska",
-    city: "Lincoln",
+    address: "",
+    state: "",
+    city: "",
     zip: 68151,
   });
   const [shippingChanged, setShippingChanged] = useState(false);
@@ -202,6 +202,33 @@ export default function CheckoutForm() {
   const [tax, setTax] = useState(0);
   const [total, setTotal] = useState(0);
 
+  const getTotal = (gross) => {
+    if (Math.round(gross * 100) !== 0) {
+      setSubtotal(gross);
+      const price = [gross];
+      fetch(`http://localhost:44478/api/cart/total/${true}/${shipping.state}`, {
+        method: "PUT",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(price),
+      })
+        .then(response => response.json())
+        .then(result => setTotal(result))
+        .catch(error => console.log("Error: ", error));
+    }
+  }
+  const checkOut = () => {
+    fetch(`http://localhost:44478/api/cart/${sessionStorage.getItem('cartId')}`, {
+      method: 'DELETE',
+    })
+      .then(response => response.json())
+      .then(result => console.log("result"))
+      .catch(error => console.log("Error: ", error));
+    setCartItems([]);
+  }
+
   useEffect(() => {
     fetch(`http://localhost:44478/api/shipping/${sessionStorage.getItem('userId') }`, {
       method: 'GET',
@@ -215,20 +242,25 @@ export default function CheckoutForm() {
       .then(response => response.json())
       .then(result => initCard(result))
       .catch(error => console.log("Error: ", error));
-    const sub = cartItems.reduce((total, item) => (parseFloat(total) + parseFloat(item.price)).toFixed(2), 0)
-    setSubtotal(sub);
-    setTax((parseFloat(sub) * parseFloat(0.07)).toFixed(2));
-    setTotal((parseFloat(sub) + parseFloat(sub) * parseFloat(0.07)).toFixed(2));
-  }, [cartItems]);
-
-  const checkout = () => {
-    fetch(`http://localhost:44478/api/cart/${sessionStorage.getItem('cartId')}`, {
-      method: 'DELETE',
+    fetch(`http://localhost:44478/api/cart/total/${false}/${"_"}`, {
+      method: "PUT",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(cartItems.map(item => (item.price))),
     })
       .then(response => response.json())
-      .then(result => console.log("result"))
+      .then(result => getTotal(parseFloat(result).toFixed(2)))
       .catch(error => console.log("Error: ", error));
-  }
+    if (cartItems.length === 0) {
+      setTotal(parseFloat(0).toFixed(2));
+      setSubtotal(parseFloat(0).toFixed(2));
+    }
+    setTax((parseFloat(total) - parseFloat(subtotal)).toFixed(2));
+  }, [cartItems, total, subtotal, shippingChanged]);
+
+  
 
   return (
     <div className="Checkout">
@@ -425,7 +457,7 @@ export default function CheckoutForm() {
       <div className="cart-info">
         Subtotal: ${subtotal} Tax: ${tax} Total: ${total}
         <br />
-        <button className="button-smaller" onClick={checkout}>Check Out</button> or{" "}
+        <button className="button-smaller" onClick={checkOut}>Check Out</button> or{" "}
         <Link to="/products" className="button-smaller">Edit Cart</Link>
       </div>
     </div>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Managers
 {
@@ -7,5 +8,6 @@ namespace Managers
         Int32 getUsersCart(Int32 userId);
 
         void checkoutCart(Int32 cartId);
+        double getTotal(List<double> prices, bool withTax, string state);
     }
 }

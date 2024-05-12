@@ -27,7 +27,6 @@ namespace Frontend.Controllers
 
         }
 
-        // GET api/<ValuesController>/5
         [HttpGet("{id}")]
         public List<string> Get(int id)
         {
@@ -37,13 +36,10 @@ namespace Frontend.Controllers
         [HttpPost]
         public Int32 Post(User user)
         {
-            
             return userManager.registerNewUser(user.Email, user.Name, user.Password);
-
 
         }
 
-        // PUT api/<ValuesController>/5
         [HttpPut("{id}/{username}/{email}/{password}")]
         public void Put(int id, string username, string email, string password)
         {

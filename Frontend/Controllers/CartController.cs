@@ -18,6 +18,12 @@ namespace Frontend.Controllers
             return cartManager.getUsersCart(userId);
         }
 
+        [HttpPut("total/{withTax}/{state}")]
+        public double Put(List<double> prices, bool withTax, string state)
+        {
+            return cartManager.getTotal(prices, withTax, state);
+        }
+
         [HttpDelete("{cartId}")]
         public void Delete(Int32 cartId)
         {

@@ -35,9 +35,20 @@ const Cart = () => {
       .then(response => response.json())
       .then(result => initCart(result))
       .catch(error => console.log("Error: ", error));
-    let total = cartItems.reduce((total, item) => (parseFloat(total) + parseFloat(item.price)).toFixed(2), 0);
-    total = (parseFloat(total) + parseFloat(total) * parseFloat(0.07)).toFixed(2); 
-    setTotalPrice(total);
+    fetch(`http://localhost:44478/api/cart/total/${false}/${"_"}`, {
+      method: "PUT",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(cartItems.map(item => (item.price))),
+    })
+      .then(response => response.json())
+      .then(result => setTotalPrice(parseFloat(result).toFixed(2)))
+      .catch(error => console.log("Error: ", error));
+    if (cartItems.length === 0) {
+      setTotalPrice(parseFloat(0).toFixed(2));
+    }
   }, [cartItems]);
 
 
