@@ -1,8 +1,8 @@
 ﻿import "../styles.css";
 import { useState, useEffect } from "react";
-
+import { useNavigate } from "react-router-dom";
 export default function AccountForm() {
-
+  const navigate = useNavigate();
   const [editAccount, setEditAccount] = useState({
     username: false,
     email: false,
@@ -306,6 +306,12 @@ export default function AccountForm() {
       .then(result => console.log("result"))
       .catch(error => console.log("Error: ", error));
   };
+
+  const logOut = () => {
+    sessionStorage.setItem('userId', 0);
+    sessionStorage.setItem('cartId', 0);
+    navigate("/");
+  }
 
   const initAccountPersonal = (account_personal) => {
     setUsername(account_personal[0]);
@@ -663,6 +669,11 @@ export default function AccountForm() {
           />
         </form>
       </div>
+      <div className="Account-Buttons">
+        <button onClick={logOut} className='button-smaller'>Log Out</button> or {' '}
+        <button onClick={() => navigate('/products') } className='button-smaller'>Go To Products</button>
+      </div>
+      
     </div>
   );
 }

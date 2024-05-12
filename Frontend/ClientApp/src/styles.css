@@ -1,3 +1,20 @@
+.account-button {
+    position: absolute;
+    justify-self: left;
+    top: 30px;
+    left: 150px;
+    font-size: 16px;
+    background-color: #99BC85;
+    color: black;
+    padding: 8px 16px;
+    border: 1px solid #99BC85;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+/* new styling */
 .Container {
     background-color: #E1F0DA;
     grid-template-rows: 1fr 1fr 1fr;
@@ -27,12 +44,10 @@
     height: min-content;
     width: min-content;
     box-shadow: 0 4px 8px 0 #596d4d, 0 6px 20px 0 #596d4d;
-    background-color: #D4E7C5;
+    background-color: white;
     border-width: 4px;
     border-radius: 2px;
-    border-style: solid;
-    border-color: #99BC85;
-    padding: 10px 10px 25px 10px;
+    padding: 10px 15px 25px 15px;
     grid-row: 2 / 3;
     grid-column: 2 / 3;
 }
@@ -42,23 +57,6 @@
     text-decoration: underline;
 }
 
-.Logout {
-    position: absolute;
-    justify-self: left;
-    top: 30px;
-    left: 150px;
-    font-size: 16px;
-    background-color: #99BC85;
-    color: black;
-    padding: 8px 16px;
-    border: 1px solid #99BC85;
-    border-radius: 5px;
-    text-decoration: none;
-    cursor: pointer;
-    transition: background-color 0.3s, box-shadow 0.3s;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
 .input-label {
     justify-self: left;
     padding: 2.5px 0px 2.5px 0px;
@@ -66,32 +64,34 @@
 
 .text-box {
     font-size: 40px;
-    background-color: #BFD8AF;
-    border-color: #99BC85;
+    background-color: #E0E0E0; /* Lighter shade of white */
+    border-color: #ccc; /* Light gray border color */
     border-style: solid;
     border-width: 4px;
     border-radius: 2px;
     margin: 0px 0px 2.5px 0px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    padding: 5px; /* Add some padding inside the text box */
 }
 
 .button {
-    font-family: Calibri;
     font-size: 40px;
-    background-color: #BFD8AF;
-    border-color: #99BC85;
-    border-style: solid;
-    border-width: 4px;
-    border-radius: 2px;
-    margin-top: 10px;
-    margin-right: 10px;
-    margin-left: 10px;
+    padding: 5px 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    margin-top: 25px;
+    margin-right: 15px;
+    margin-left: 15px;
+    cursor: pointer;
 }
 
-.button:active {
-    color: azure;
-    background-color: #99BC85;
-    transform: scale(105%);
-}
+    .button:hover {
+        color: azure;
+        background-color: #218838;
+        transform: scale(105%);
+    }
 
 .Register {
     font-family: 'Leelawadee UI';
@@ -102,11 +102,8 @@
     height: min-content;
     width: 500px;
     box-shadow: 0 4px 8px 0 #596d4d, 0 6px 20px 0 #596d4d;
-    background-color: #D4E7C5;
-    border-width: 4px;
+    background-color: white;
     border-radius: 2px;
-    border-style: solid;
-    border-color: #99BC85;
     padding: 10px 0px 25px 0px;
     grid-row: 2 / 3;
     grid-column: 2 / 3;
@@ -202,11 +199,11 @@
     overflow-y: auto;
 }
 
-.ProductDisplay img {
+    .ProductDisplay img {
         width: 100%; /* Set the width to 100% to make the images fill the container */
         max-height: 150px; /* Set a maximum height to prevent images from becoming too large */
         object-fit: cover; /* Maintain aspect ratio and crop if necessary */
-}
+    }
 
 .ShoppingCart {
     width: 320px;
@@ -230,7 +227,6 @@
     align-items: center;
     padding: 10px;
     border-bottom: 1px solid #ddd;
-    height: min-content;
 }
 
     .cart-item img {
@@ -243,26 +239,26 @@
         margin: 0;
     }
 
-.cart-item button {
-    margin-left: auto;
-}
+    .cart-item button {
+        margin-left: auto;
+    }
 
 .view-product-link {
     font-size: 16px;
     background-color: #99BC85;
     color: black;
     padding: 8px 16px;
-    border: 1px solid #99BC85; 
+    border: 1px solid #99BC85;
     border-radius: 5px;
     text-decoration: none;
     cursor: pointer;
     transition: background-color 0.3s, box-shadow 0.3s;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.view-product-link:hover {
+    .view-product-link:hover {
         background-color: #88a876;
-}
+    }
 
 .button-container {
     margin-top: 15px;
@@ -282,7 +278,7 @@
 
     .ProductDetails img {
         width: 100%; /* Set the width to 100% to make the images fill the container */
-        max-height: 500px; /* Set a maximum height to prevent images from becoming too large */
+        max-height: 400px; /* Set a maximum height to prevent images from becoming too large */
         object-fit: contain; /* Maintain aspect ratio and crop if necessary */
     }
 
@@ -312,9 +308,10 @@
         .ProductDetails .back-link:hover {
             background-color: #88a876;
         }
-    .cart-item button {
-        margin-left: auto; /* Align the button to the right */
-    }
+
+.cart-item button {
+    margin-left: auto; /* Align the button to the right */
+}
 
 .Account {
     font-family: "Leelawadee UI";
@@ -326,16 +323,26 @@
     width: min-content;
     display: grid;
     grid-template-columns: 1fr 25px 1fr;
-    grid-template-rows: min-content min-content;
+    grid-template-rows: min-content min-content min-content;
     box-shadow: 0 4px 8px 0 #596d4d, 0 6px 20px 0 #596d4d;
-    background-color: #d4e7c5;
+    background-color: white;
     border-width: 4px;
     border-radius: 2px;
-    border-style: solid;
-    border-color: #99bc85;
-    padding: 10px 25px 25px 25px;
+    padding: 10px 30px 30px 30px;
     grid-row: 2 / 3;
     grid-column: 2 / 3;
+}
+
+.Account-Buttons {
+    grid-row: 3 / 4;
+    grid-column: 1 / 4;
+    align-self: center;
+    text-align: center;
+    justify-self: center;
+    display: inline-block;
+    white-space: nowrap;
+    width: min-content;
+    height: min-content;
 }
 
 .Account-Info {
@@ -383,11 +390,9 @@
     grid-template-columns: 1fr 25px 1fr;
     grid-template-rows: min-content min-content;
     box-shadow: 0 4px 8px 0 #596d4d, 0 6px 20px 0 #596d4d;
-    background-color: #d4e7c5;
+    background-color: white;
     border-width: 4px;
     border-radius: 2px;
-    border-style: solid;
-    border-color: #99bc85;
     padding: 10px 25px 25px 25px;
     grid-row: 2 / 3;
     grid-column: 2 / 3;
@@ -420,23 +425,21 @@
 
 .button-smaller {
     font-family: Calibri;
-    color: black;
+    color: white;
     font-size: 20px;
-    background-color: #bfd8af;
-    border-color: #99bc85;
-    border-style: solid;
-    border-width: 2px;
+    background-color: #28a745;
     border-radius: 2px;
-    margin-top: 5px;
+    margin-top: 15px;
+    border: none;
     text-decoration: none; /* Remove underline */
     cursor: pointer; /* Change cursor to pointer on hover */
     display: inline-block; /* Ensure button is displayed as a block element */
     padding: 5px 10px; /* Add padding to improve button appearance */
 }
 
-    .button-smaller:active {
+    .button-smaller:hover {
         color: azure;
-        background-color: #99bc85;
+        background-color: #218838;
         transform: scale(105%);
     }
 
@@ -451,7 +454,7 @@
     width: 300px;
 }
 
-.SearchBar input[type="text"] {
+    .SearchBar input[type="text"] {
         width: 100%; /* Set the width of the text input to 100% of the search bar */
         padding: 5px; /* Add padding to the text input */
         box-sizing: border-box; /* Ensure padding is included in the width */
@@ -486,6 +489,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive grid layout */
     gap: 20px; /* Gap between grid items */
+    height: min-content;
 }
 
 .cart-item {
@@ -549,19 +553,6 @@
     text-align: right;
 }
 
-.button {
-    padding: 10px 20px;
-    background-color: #99BC85;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-transform: uppercase;
-}
-
-    .button:hover {
-        background-color: #88a876;
-    }
 
 .back-to-products {
     text-align: center;
