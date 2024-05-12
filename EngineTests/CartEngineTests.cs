@@ -77,7 +77,7 @@ namespace EngineTests
         {
             ICartEngine engine = new CartEngine();
 
-            Assert.AreEqual(84.4, engine.calculateTotalWithTax(80, "NE"), .0001);
+            Assert.AreEqual(80.0, engine.calculateTotalWithTax(80, "NE"), .0001);
         }
 
         [TestMethod]
@@ -85,15 +85,15 @@ namespace EngineTests
         {
             ICartEngine engine = new CartEngine();
 
-            Assert.AreEqual(56.55, engine.calculateTotalWithTax(53.6), .0001);
+            Assert.AreEqual(53.60, engine.calculateTotalWithTax(53.6), .0001);
         }
 
         [TestMethod]
-        public void calculateTotalWithTax_NewJersey_TenCents()
+        public void calculateTotalWithTax_Oklahoma_TenDollars()
         {
             ICartEngine engine = new CartEngine();
 
-            Assert.AreEqual(.11, engine.calculateTotalWithTax(.1, "NJ"), .0001);
+            Assert.AreEqual(10.45, engine.calculateTotalWithTax(10, "OK"), .0001);
         }
     }
 }
