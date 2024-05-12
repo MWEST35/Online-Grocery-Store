@@ -23,5 +23,22 @@ namespace Managers
             return userAccessor.registerUser(email, username, password, connectionAccessor.createConnection());
 
         }
+
+        List<string> IUserManager.accountInfo(int id)
+        {
+            return userAccessor.getAccountInfo(id, connectionAccessor.createConnection());
+        }
+
+        void IUserManager.updateUserAccountInfo(int id, string username, string email, string password)
+        {
+            userAccessor.updateAccountInfo(id, username, email, password, connectionAccessor.createConnection());
+            return;
+        }
+
+        void IUserManager.updateUserPersonalInfo(int id, string name, string phone)
+        {
+            userAccessor.updatePersonalInfo(id, name, phone, connectionAccessor.createConnection());
+            return;
+        }
     }
 }

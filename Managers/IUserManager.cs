@@ -11,5 +11,11 @@ namespace Managers
         Int32 logInValidation(string username, string password);
 
         Int32 registerNewUser(string email, string username, string password);
+
+        List<string> accountInfo(int id);
+
+        void updateUserAccountInfo(int id, string username, string email, string password);
+
+        void updateUserPersonalInfo(int id, string name, string phone);
     }
 }
