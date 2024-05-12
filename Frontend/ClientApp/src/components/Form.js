@@ -133,7 +133,7 @@ export default function Form() {
       </div>
       <form onSubmit={handleSubmit}>
         {/* Labels and inputs for form date */}
-        <label className="input-label">Name</label>
+        <label className="input-label">Username</label>
         <br />
         <input
           onChange={handleName}

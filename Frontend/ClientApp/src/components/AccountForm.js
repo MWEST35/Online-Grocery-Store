@@ -459,6 +459,8 @@ export default function AccountForm() {
               type="phone"
               value={phone}
               onChange={handlePhone}
+              pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+              placeholder="123-456-7890"
               required
             ></input>
           </div>
@@ -607,6 +609,8 @@ export default function AccountForm() {
               type="text"
               value={card.num}
               onChange={handleCardNum}
+              pattern="[0-9]{14,16}"
+              placeholder="01234567890123456"
               required
             ></input>
           </div>
@@ -628,6 +632,8 @@ export default function AccountForm() {
               type="text"
               value={card.cvv}
               onChange={handleCardCvv}
+              pattern="[0-9]{3,4}"
+              placeholder="###"
               required
             ></input>
           </div>
@@ -649,6 +655,8 @@ export default function AccountForm() {
               type="text"
               value={card.date}
               onChange={handleCardDate}
+              pattern="[0-9]{2}/[0-9]{2}"
+              placeholder="MM/YY"
               required
             ></input>
           </div>

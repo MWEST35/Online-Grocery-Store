@@ -50,7 +50,7 @@ export default function LoginForm() {
     <div className="Login">
       <header className="Login-Register-header">Log In</header>
       <form onSubmit={handleSubmit}>
-        <label for="username-email" className="input-label">Username or Email</label>
+        <label for="username-email" className="input-label">Username</label>
         <br />
         <input
           id="username-email"
