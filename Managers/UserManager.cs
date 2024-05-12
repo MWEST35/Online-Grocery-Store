@@ -18,7 +18,7 @@ namespace Managers
             return result;
         }
 
-        bool IUserManager.registerNewUser(string email, string username, string password)
+        Int32 IUserManager.registerNewUser(string email, string username, string password)
         {
             return userAccessor.registerUser(email, username, password, connectionAccessor.createConnection());
 

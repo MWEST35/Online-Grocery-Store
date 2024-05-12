@@ -216,6 +216,15 @@ export default function CheckoutForm() {
   const [tax, setTax] = useState("$1.50");
   const [total, setTotal] = useState("$23.50");
 
+  const checkout = () => {
+    fetch(`http://localhost:44478/api/cart/${sessionStorage.getItem('cartId')}`, {
+      method: 'DELETE',
+    })
+      .then(response => response.json())
+      .then(result => console.log("result"))
+      .catch(error => console.log("Error: ", error));
+  }
+
   return (
     <div className="Checkout">
       <div className="Shipping-Info-Checkout">
@@ -411,7 +420,7 @@ export default function CheckoutForm() {
       <div className="cart-info">
         Subtotal: {subtotal} Tax: {tax} Total: {total}
         <br />
-        <button className="button-smaller">Check Out</button> or{" "}
+        <button className="button-smaller" onClick={checkout}>Check Out</button> or{" "}
         <Link to="/products" className="button-smaller">Edit Cart</Link>
       </div>
     </div>

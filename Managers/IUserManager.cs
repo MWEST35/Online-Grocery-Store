@@ -10,6 +10,6 @@ namespace Managers
     {
         Int32 logInValidation(string username, string password);
 
-        bool registerNewUser(string email, string username, string password);
+        Int32 registerNewUser(string email, string username, string password);
     }
 }

@@ -4,6 +4,7 @@ import ProductFilter from './ProductFilter';
 import ShoppingCart from './ShoppingCart';
 import ProductCard from './ProductCard';
 import { Link } from "react-router-dom";
+import Logout from './Logout';
 
 export default function ProductForm() {
   const [products, setProducts] = useState([]);
@@ -15,11 +16,10 @@ export default function ProductForm() {
   const initPage = (DBproducts) => {
     let updatedProducts = [];
     for (const product of DBproducts) {
-      console.log(product);
       const newProduct = {
         id: parseInt(product[9]),
         name: product[0],
-        price: product[5],
+        price: parseFloat(product[5]),
         category: product[2],
         manufacturer: product[7],
         description: product[6],
@@ -27,13 +27,35 @@ export default function ProductForm() {
         weight: product[4],
         SKU: product[8],
         rating: product[1],
-        image: 'https://png.pngtree.com/element_our/png/20181129/vector-illustration-of-fresh-red-apple-with-single-leaf-png_248312.jpg'
+        image: product[10]
       };
       updatedProducts = [...updatedProducts, newProduct];
     }
     setProducts(updatedProducts);
     localStorage.setItem('products', JSON.stringify(updatedProducts));
   };
+
+  const initCart = (DBcart) => {
+    let updatedCartItems = [];
+    for (const product of DBcart) {
+      const newProduct = {
+        id: parseInt(product[9]),
+        name: product[0],
+        price: parseFloat(product[5]),
+        category: product[2],
+        manufacturer: product[7],
+        description: product[6],
+        dimensions: product[3],
+        weight: product[4],
+        SKU: product[8],
+        rating: product[1],
+        image: product[10]
+      };
+      updatedCartItems = [...updatedCartItems, newProduct];
+    }
+    setCartItems(updatedCartItems);
+    localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
+  }
 
   useEffect(() => {
     fetch(`http://localhost:44478/api/product/`, {
@@ -42,8 +64,13 @@ export default function ProductForm() {
       .then(response => response.json())
       .then(result => initPage(result))
       .catch(error => console.log("Error: ", error));
-    //localStorage.setItem('products', JSON.stringify(products));
-  }, []);
+    fetch(`http://localhost:44478/api/product/${sessionStorage.getItem('cartId')}`, {
+      method: 'GET',
+    })
+      .then(response => response.json())
+      .then(result => initCart(result))
+      .catch(error => console.log("Error: ", error));
+  }, [products]);
 
   const handleFilterChange = (e) => {
     setSelectedCategory(e.target.value);
@@ -54,6 +81,13 @@ export default function ProductForm() {
   };
 
   const handleAddToCart = (product) => {
+    fetch(`http://localhost:44478/api/product/${product.id}/${sessionStorage.getItem('cartId')}/${true}`, {
+      method: 'PUT',
+    })
+      .then(response => response.json())
+      .then(result => console.log("result"))
+      .catch(error => console.log("Error: ", error));
+    /**
     const existingItem = cartItems.find(item => item.id === product.id);
 
     if (existingItem) {
@@ -67,7 +101,7 @@ export default function ProductForm() {
       const updatedCartItems = [...cartItems, newCartItem];
       setCartItems(updatedCartItems);
       localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
-    }
+    }*/
   };
 
   const filteredProducts = products.filter(product => {
@@ -87,6 +121,8 @@ export default function ProductForm() {
         className="logo"
         draggable="false"
       />
+
+      <Logout />
 
       <div className="SearchBar">
         <input
