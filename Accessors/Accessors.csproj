@@ -161,6 +161,7 @@
     <Compile Include="UserAccessor.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Accessors.cd" />
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
