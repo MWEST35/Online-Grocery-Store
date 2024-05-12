@@ -147,6 +147,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CardManager.cs" />
+    <Compile Include="CartManager.cs" />
+    <Compile Include="ICartManager.cs" />
     <Compile Include="IShippingManager.cs" />
     <Compile Include="ProductManager.cs" />
     <Compile Include="ICardManager.cs" />

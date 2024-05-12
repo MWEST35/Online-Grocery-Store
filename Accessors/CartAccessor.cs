@@ -9,29 +9,31 @@ using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
 namespace Accessors
 {
-    internal class CartAccessor : ICartAccessor
+    public class CartAccessor : ICartAccessor
     {
-       
-        List<string> ICartAccessor.retrieveItems(string cartId, SqlConnection conn)
+        Int32 ICartAccessor.getUsersCart(Int32 userId, SqlConnection conn)
         {
-            List<string> items = new List<string>();
-
-            string query = "SELECT p.productName FROM product p INNER JOIN cart c ON c.cart_id = p.cartId WHERE c.cart_id = @cart_id";
+            Int32 result = 0;
+            string query = "select cart_id from Cart where user_id = @userId";
             using (SqlCommand cmd = new SqlCommand(query))
             {
-                cmd.Parameters.AddWithValue("@cart_id", cartId);
+                cmd.Parameters.Add("@userId", System.Data.SqlDbType.Int);
+
+                cmd.Parameters["@userId"].Value = userId;
                 cmd.Connection = conn;
+
                 try
                 {
                     cmd.Connection.Open();
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        while (reader.Read())
+                        if (reader.Read())
                         {
-                            string productName = reader.GetString(0);
-                            items.Add(productName);
+                            result = reader.GetInt32(0);
                         }
                     }
+
+                    cmd.Connection.Close();
                 }
                 catch (SqlException exception)
                 {
@@ -39,46 +41,31 @@ namespace Accessors
                 }
             }
 
-            return items;
+            return result;
         }
-
-        void ICartAccessor.addItem(string cartId, string productId, SqlConnection conn)
+        void ICartAccessor.checkoutCart(int cartId, SqlConnection conn)
         {
-            string query = "INSERT INTO Cart(product_id, quantity) SELECT productId, 1 FROM product WHERE productId = @productId";
+            string query = "delete from Product where cart_id = @cartId";
             using (SqlCommand cmd = new SqlCommand(query))
             {
-                cmd.Parameters.AddWithValue("@productId", productId);
-                try
-                {
-                    cmd.Connection = conn;
-                    cmd.Connection.Open();
-                    cmd.ExecuteNonQuery();
-                }
-                catch (SqlException exception)
-                {
-                    throw new Exception(exception.Message);
-                }
-            }
-        }
+                cmd.Parameters.Add("@cartId", System.Data.SqlDbType.Int);
 
-        void ICartAccessor.removeItem(string cartId, string productId, SqlConnection conn)
-        {
-            string query = "DELETE FROM Cart WHERE cart_id = @cartId AND product_id = @productId";
-            using (SqlCommand cmd = new SqlCommand(query))
-            {
-                cmd.Parameters.AddWithValue("@cartId", cartId);
-                cmd.Parameters.AddWithValue("@productId", productId);
+                cmd.Parameters["@cartId"].Value = cartId;
+                cmd.Connection = conn;
+
                 try
                 {
-                    cmd.Connection = conn;
                     cmd.Connection.Open();
                     cmd.ExecuteNonQuery();
+                    cmd.Connection.Close();
                 }
                 catch (SqlException exception)
                 {
                     throw new Exception(exception.Message);
                 }
             }
+
+            return;
         }
     }
 

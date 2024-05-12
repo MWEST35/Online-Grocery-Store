@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Accessors
 {
-    internal interface ICartAccessor
+    public interface ICartAccessor
     {
-        List<string> retrieveItems(string cartId, SqlConnection conn);
-        void addItem(string cartId, string productId, SqlConnection conn);
-        void removeItem(string cartId, string productId, SqlConnection conn);
+        Int32 getUsersCart(Int32 userId, SqlConnection conn);
+
+        void checkoutCart(Int32 cartId, SqlConnection conn);
 
     }
 }
