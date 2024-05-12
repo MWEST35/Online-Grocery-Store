@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
-import Logout from './Logout';
+import { useNavigate } from "react-router-dom";
 
 function ProductView() {
+    const navigate = useNavigate();
     const products = JSON.parse(localStorage.getItem('products')) || [];
     const { productId } = useParams();
     const product = products.find(p => p.id === parseInt(productId));
@@ -19,7 +20,6 @@ function ProductView() {
                 className="logo"
                 draggable="false"
             />
-            <Logout />
 
         <div className="ProductDetails">
             <h2>{product.name}</h2>
@@ -27,7 +27,7 @@ function ProductView() {
             <img src={product.image} alt={product.name} />
             <p>Price: ${product.price}</p>
             <p>Category: {product.category}</p>
-            <p>Manfactuer: {product.manufacturer}</p>
+            <p>Manufacturer: {product.manufacturer}</p>
             <p>Description: {product.description}</p>
             <p>Dimensions: {product.dimensions}</p>
             <p>Weight: {product.weight}</p>

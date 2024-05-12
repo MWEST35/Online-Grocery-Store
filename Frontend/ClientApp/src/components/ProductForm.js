@@ -4,9 +4,10 @@ import ProductFilter from './ProductFilter';
 import ShoppingCart from './ShoppingCart';
 import ProductCard from './ProductCard';
 import { Link } from "react-router-dom";
-import Logout from './Logout';
+import { useNavigate } from "react-router-dom";
 
 export default function ProductForm() {
+  const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState(['All', 'Fruit', 'Vegetables', 'Bread', 'Meat'/* array of product filters goes here */]);
   const [cartItems, setCartItems] = useState(JSON.parse(localStorage.getItem('cartItems')) || []);
@@ -122,7 +123,7 @@ export default function ProductForm() {
         draggable="false"
       />
 
-      <Logout />
+      <button className="account-button" onClick={() => navigate("/account")}>Account</button>
 
       <div className="SearchBar">
         <input

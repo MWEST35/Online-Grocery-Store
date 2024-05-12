@@ -35,7 +35,8 @@ const Cart = () => {
       .then(response => response.json())
       .then(result => initCart(result))
       .catch(error => console.log("Error: ", error));
-    const total = cartItems.reduce((total, item) => total + (item.price), 0);
+    let total = cartItems.reduce((total, item) => (parseFloat(total) + parseFloat(item.price)).toFixed(2), 0);
+    total = (parseFloat(total) + parseFloat(total) * parseFloat(0.07)).toFixed(2); 
     setTotalPrice(total);
   }, [cartItems]);
 

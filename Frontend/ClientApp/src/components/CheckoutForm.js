@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 export default function CheckoutForm() {
+  let [cartItems, setCartItems] = useState(JSON.parse(localStorage.getItem('cartItems')));
   const [editCard, setEditCard] = useState({
     name: false,
     number: false,
@@ -197,6 +198,10 @@ export default function CheckoutForm() {
     setCard({ name: card[0], num: card[1], cvv: card[2], date: card[3] });
   }
 
+  const [subtotal, setSubtotal] = useState(0);
+  const [tax, setTax] = useState(0);
+  const [total, setTotal] = useState(0);
+
   useEffect(() => {
     fetch(`http://localhost:44478/api/shipping/${sessionStorage.getItem('userId') }`, {
       method: 'GET',
@@ -210,11 +215,11 @@ export default function CheckoutForm() {
       .then(response => response.json())
       .then(result => initCard(result))
       .catch(error => console.log("Error: ", error));
-  }, []);
-
-  const [subtotal, setSubtotal] = useState("$21.50");
-  const [tax, setTax] = useState("$1.50");
-  const [total, setTotal] = useState("$23.50");
+    const sub = cartItems.reduce((total, item) => (parseFloat(total) + parseFloat(item.price)).toFixed(2), 0)
+    setSubtotal(sub);
+    setTax((parseFloat(sub) * parseFloat(0.07)).toFixed(2));
+    setTotal((parseFloat(sub) + parseFloat(sub) * parseFloat(0.07)).toFixed(2));
+  }, [cartItems]);
 
   const checkout = () => {
     fetch(`http://localhost:44478/api/cart/${sessionStorage.getItem('cartId')}`, {
@@ -418,7 +423,7 @@ export default function CheckoutForm() {
         </form>
       </div>
       <div className="cart-info">
-        Subtotal: {subtotal} Tax: {tax} Total: {total}
+        Subtotal: ${subtotal} Tax: ${tax} Total: ${total}
         <br />
         <button className="button-smaller" onClick={checkout}>Check Out</button> or{" "}
         <Link to="/products" className="button-smaller">Edit Cart</Link>

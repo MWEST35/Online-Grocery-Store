@@ -1,3 +1,20 @@
+.account-button {
+    position: absolute;
+    justify-self: left;
+    top: 30px;
+    left: 150px;
+    font-size: 16px;
+    background-color: #99BC85;
+    color: black;
+    padding: 8px 16px;
+    border: 1px solid #99BC85;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+/* new styling */
 .Container {
     background-color: #E1F0DA;
     grid-template-rows: 1fr 1fr 1fr;
@@ -38,23 +55,6 @@
 .Login-Register-header {
     font-size: 50px;
     text-decoration: underline;
-}
-
-.Logout {
-    position: absolute;
-    justify-self: left;
-    top: 30px;
-    left: 150px;
-    font-size: 16px;
-    background-color: #99BC85;
-    color: black;
-    padding: 8px 16px;
-    border: 1px solid #99BC85;
-    border-radius: 5px;
-    text-decoration: none;
-    cursor: pointer;
-    transition: background-color 0.3s, box-shadow 0.3s;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .input-label {
@@ -199,11 +199,11 @@
     overflow-y: auto;
 }
 
-.ProductDisplay img {
+    .ProductDisplay img {
         width: 100%; /* Set the width to 100% to make the images fill the container */
         max-height: 150px; /* Set a maximum height to prevent images from becoming too large */
         object-fit: cover; /* Maintain aspect ratio and crop if necessary */
-}
+    }
 
 .ShoppingCart {
     width: 320px;
@@ -227,7 +227,6 @@
     align-items: center;
     padding: 10px;
     border-bottom: 1px solid #ddd;
-    height: min-content;
 }
 
     .cart-item img {
@@ -240,26 +239,26 @@
         margin: 0;
     }
 
-.cart-item button {
-    margin-left: auto;
-}
+    .cart-item button {
+        margin-left: auto;
+    }
 
 .view-product-link {
     font-size: 16px;
     background-color: #99BC85;
     color: black;
     padding: 8px 16px;
-    border: 1px solid #99BC85; 
+    border: 1px solid #99BC85;
     border-radius: 5px;
     text-decoration: none;
     cursor: pointer;
     transition: background-color 0.3s, box-shadow 0.3s;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.view-product-link:hover {
+    .view-product-link:hover {
         background-color: #88a876;
-}
+    }
 
 .button-container {
     margin-top: 15px;
@@ -279,7 +278,7 @@
 
     .ProductDetails img {
         width: 100%; /* Set the width to 100% to make the images fill the container */
-        max-height: 500px; /* Set a maximum height to prevent images from becoming too large */
+        max-height: 400px; /* Set a maximum height to prevent images from becoming too large */
         object-fit: contain; /* Maintain aspect ratio and crop if necessary */
     }
 
@@ -309,9 +308,10 @@
         .ProductDetails .back-link:hover {
             background-color: #88a876;
         }
-    .cart-item button {
-        margin-left: auto; /* Align the button to the right */
-    }
+
+.cart-item button {
+    margin-left: auto; /* Align the button to the right */
+}
 
 .Account {
     font-family: "Leelawadee UI";
@@ -323,7 +323,7 @@
     width: min-content;
     display: grid;
     grid-template-columns: 1fr 25px 1fr;
-    grid-template-rows: min-content min-content;
+    grid-template-rows: min-content min-content min-content;
     box-shadow: 0 4px 8px 0 #596d4d, 0 6px 20px 0 #596d4d;
     background-color: white;
     border-width: 4px;
@@ -331,6 +331,18 @@
     padding: 10px 30px 30px 30px;
     grid-row: 2 / 3;
     grid-column: 2 / 3;
+}
+
+.Account-Buttons {
+    grid-row: 3 / 4;
+    grid-column: 1 / 4;
+    align-self: center;
+    text-align: center;
+    justify-self: center;
+    display: inline-block;
+    white-space: nowrap;
+    width: min-content;
+    height: min-content;
 }
 
 .Account-Info {
@@ -442,7 +454,7 @@
     width: 300px;
 }
 
-.SearchBar input[type="text"] {
+    .SearchBar input[type="text"] {
         width: 100%; /* Set the width of the text input to 100% of the search bar */
         padding: 5px; /* Add padding to the text input */
         box-sizing: border-box; /* Ensure padding is included in the width */
@@ -477,6 +489,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive grid layout */
     gap: 20px; /* Gap between grid items */
+    height: min-content;
 }
 
 .cart-item {
